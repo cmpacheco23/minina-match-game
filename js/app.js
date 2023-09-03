@@ -1,5 +1,6 @@
 //// Add html buttons one for each dificulty level
 //// Add a reset button to the html file
+//// Add a container element for cards to append to
 
 console.log('minina check')
 /*-------------------------------- Constants --------------------------------*/
@@ -8,9 +9,28 @@ console.log('minina check')
 
 
 
-  /*------------------------ Cached Element References ------------------------*/
+/*------------------------ Cached Element References ------------------------*/
 
 
+//// Add cache reference for dificulty buttons
+//// Add cache reference for reset button
+//// Add cache reference for container element
+
+  const easyGame = document.getElementById('easy-game')
+  console.log('easy mode selected')
+
+  const mediumGame = document.getElementById('medium-game')
+  console.log('medium mode selected')
+  
+  const hardGame = document.getElementById('hard-game')
+  console.log('hard mode selected')
+  const resetBtnEl = document.getElementById('reset-game')
+  console.log('you reset the game')
+  
+  const cardEls = document.querySelector('#card-container')
+  console.log('card container activated')
+
+  
   /*----------------------------- Event Listeners -----------------------------*/
 
 
@@ -18,10 +38,6 @@ console.log('minina check')
 
 
 
-// Add a container element for cards to append to
-// Add cache reference for dificulty buttons
-// Add cache reference for reset button
-// Add cache reference for container element
 // Add variables that will determine the state of the game: board, winner, countdown, moves, matchedCard, cardToRemove, openCards
 // Add a constant variable cardsEls that will store the cards needed, their number will be adjusted at each level
 // Add cache reference for cardsEls

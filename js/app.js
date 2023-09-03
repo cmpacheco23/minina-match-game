@@ -50,15 +50,89 @@ for (let cardEl of cardEls) {
 //// Add event listener for card selection
 //// Add event listener for timer
 
-easyMode.addEventListener('click', initEasy)
+easyGame.addEventListener('click', initEasy)
 
-mediumMode.addEventListener('click', initMedium)
+mediumGame.addEventListener('click', initMedium)
 
-hardMode.addEventListener('click', initHard)
+hardGame.addEventListener('click', initHard)
 
 timerCountdown.addEventListener('',)
 
-  /*-------------------------------- Functions --------------------------------*/
+resetBtnEl.addEventListener('click', initEasy, initMedium, initHard)
+/*-------------------------------- Functions --------------------------------*/
+
+// Within each init level:
+// Create init function for each level of the game
+  // set board variable to an array containing the x (number will vary by level) to nulls to represent unflipped squares
+  // invoke / call shuffleCards function
+  // set winner to false
+  // set timer to moves to number of total moves allowed by level
+  // set cardMatch to false
+  // call render function at the end of each init function
+  function initEasy() {
+    board = 16
+    timerCountdown =
+    cardMatch = false
+    winner = false
+    
+    render()
+    shuffleCards() // create shufflecard function
+  }
+  
+  function initMedium(){
+    
+  }
+  
+  function initHard(){
+    
+  }
+  function render(cardPicked) {
+    //// Create a render function with a parameter cardpicked
+    // add rules so that previous card is removed before next click, otherwise more than one card will be flipped on next click
+    //// Invoke updateBoard & updateMessage functions within render function
+    
+    updateBoard()
+    updateMessage()
+  }
+
+function shuffleCards(){
+
+  // create a shuffleCards function so the cards are random each time the game starts
+}
+
+function updateBoard() {
+
+  // create a function updateBoard
+    // invoke cardPicked function
+    // invoke matched function
+    // invoked unmatched function
+  // create function called updateMessage
+  // create timer function - will watch the video
+  // Add a favicon to the site
+}
+
+function handleClick() {
+  // create a function called handleClick with evt parameter
+    // update cardsEl so handleClick is invoked when card is clicked
+
+}
+function checkCard() {
+  // create a function checkCard 
+    // will check `if` opened card is a match
+    // if open card isnt a match it will flip the card over and remove a move
+
+}
+
+function unmatched() {
+  // create function unmatched to handle cards that don't match
+
+}
+
+function timerCountdown(){
+  
+}
+// Add event listener to the board
+// add light mode dark mode
 
 
 
@@ -67,33 +141,6 @@ timerCountdown.addEventListener('',)
 // Test the function to make sure its working
 // Tweak event listener so that picture data is stored in a variable
 // Create a card so each image will have a card assocaited with it
-// Create a render function with a parameter cardpicked
-  // add rules so that previous card is removed before next click, otherwise more than one card will be flipped on next click
-// Create init function for each level of the game
-// Within each init level:
-  // set board variable to an array containing the x (number will vary by level) to nulls to represent unflipped squares
-  // invoke / call shuffleCards function
-  // set winner to false
-  // set timer to moves to number of total moves allowed by level
-  // set cardMatch to false
-  // call render function at the end of each init function
-  // Invoke updateBoard & updateMessage functions within render function
-// create a shuffleCards function so the cards are random each time the game starts
-// create a function updateBoard
-  // invoke cardPicked function
-  // invoke matched function
-  // invoked unmatched function
-// create function called updateMessage
-// create timer function - will watch the video
-// Add a favicon to the site
-// create a function called handleClick with evt parameter
-  // update cardsEl so handleClick is invoked when card is clicked
-// create a function checkCard 
-  // will check `if` opened card is a match
-  // if open card isnt a match it will flip the card over and remove a move
-// create function unmatched to handle cards that don't match
-// Add event listener to the board
-// add light mode dark mode
 // Go back and add sound effects when: 
   // game starts
   // card is flipped

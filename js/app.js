@@ -7,6 +7,9 @@ console.log('minina check')
 
 /*---------------------------- Variables (state) ----------------------------*/
 
+//// Add variables that will determine the state of the game: board, winner, countdown, moves, matchedCard, cardToRemove, openCards
+
+let board, winner, countdown, moves, matchedCard, cardToRemove, openCards
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -15,6 +18,8 @@ console.log('minina check')
 //// Add cache reference for dificulty buttons
 //// Add cache reference for reset button
 //// Add cache reference for container element
+//// Add a constant variable cardsEls that will store the cards needed, their number will be adjusted at each level
+//// Add cache reference for cardsEls
 
   const easyGame = document.getElementById('easy-game')
   console.log('easy mode selected')
@@ -33,19 +38,30 @@ console.log('minina check')
   
   /*----------------------------- Event Listeners -----------------------------*/
 
+  //// Add event listener for cardsEl, so only one card flips at a time when clicked: use a for of loop
+
+for (let cardEl of cardEls) {
+  cardEl.addEventListener('click',)
+  console.log(cardEl)
+}
+// Add event listener for difficulty button
+
+//// Add event listener for reset button
+//// Add event listener for card selection
+//// Add event listener for timer
+
+easyMode.addEventListener('click', initEasy)
+
+mediumMode.addEventListener('click', initMedium)
+
+hardMode.addEventListener('click', initHard)
+
+timerCountdown.addEventListener('',)
 
   /*-------------------------------- Functions --------------------------------*/
 
 
 
-// Add variables that will determine the state of the game: board, winner, countdown, moves, matchedCard, cardToRemove, openCards
-// Add a constant variable cardsEls that will store the cards needed, their number will be adjusted at each level
-// Add cache reference for cardsEls
-// Add event listener for cardsEl, so only one card flips at a time when clicked: use a for of loop
-// Add event listener for difficulty button
-// Add event listener for reset button
-// Add event listener for card selection
-// Add event listener for timer
 // Write and export a function to access picture data
 // Import the function that will allow us access to the picture data (this lives under constants)
 // Test the function to make sure its working

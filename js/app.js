@@ -1,3 +1,6 @@
+//// Add html buttons one for each dificulty level
+//// Add a reset button to the html file
+
 console.log('minina check')
 /*-------------------------------- Constants --------------------------------*/
 
@@ -15,9 +18,6 @@ console.log('minina check')
 
 
 
-  // my pseudocode
-// Add html buttons one for each dificulty level
-// Add a reset button to the html file
 // Add a container element for cards to append to
 // Add cache reference for dificulty buttons
 // Add cache reference for reset button

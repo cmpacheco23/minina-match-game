@@ -32,7 +32,7 @@ let board, winner, countdown, moves, matchedCard, cardToRemove, openCards
   const resetBtnEl = document.getElementById('reset-game')
   console.log('you reset the game')
   
-  const cardEls = document.querySelector('#card-container')
+  const cardEls = document.querySelector('#minina-card')
   console.log('card container activated')
 
   
@@ -41,7 +41,7 @@ let board, winner, countdown, moves, matchedCard, cardToRemove, openCards
   //// Add event listener for cardsEl, so only one card flips at a time when clicked: use a for of loop
 
 for (let cardEl of cardEls) {
-  cardEl.addEventListener('click',)
+  cardEl.addEventListener('click', handleClick())
   console.log(cardEl)
 }
 // Add event listener for difficulty button
@@ -74,17 +74,26 @@ resetBtnEl.addEventListener('click', initEasy, initMedium, initHard)
     timerCountdown =
     cardMatch = false
     winner = false
-    
     render()
     shuffleCards() // create shufflecard function
   }
   
   function initMedium(){
-    
+    board = 30
+    timerCountdown =
+    cardMatch = false
+    winner = false
+    render()
+    shuffleCards() // create shufflecard function
   }
   
   function initHard(){
-    
+    board = 50
+    timerCountdown =
+    cardMatch = false
+    winner = false
+    render()
+    shuffleCards() // create shufflecard function
   }
   function render(cardPicked) {
     //// Create a render function with a parameter cardpicked
@@ -112,6 +121,8 @@ function updateBoard() {
 }
 
 function handleClick() {
+
+  console.log('click works')
   // create a function called handleClick with evt parameter
     // update cardsEl so handleClick is invoked when card is clicked
 
@@ -129,7 +140,7 @@ function unmatched() {
 }
 
 function timerCountdown(){
-  
+
 }
 // Add event listener to the board
 // add light mode dark mode

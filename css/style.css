@@ -1,12 +1,3 @@
-.card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  border: 1px solid plum;
-  padding: 10px;
-  width: 150px;
-}
-
 
 #card-container {
   display: flex;

@@ -6,27 +6,19 @@
 
 // import { generateCards } from "../js/data.js"
 const mininaCards = [ 
-  {imageUrl: "../images/fronts/minina1.svg",
-  cardName: 'card1' },
-  {imageUrl: "../images/fronts/minina2.svg",
-  cardName: 'card2' },
-  {imageUrl: "../images/fronts/minina3.svg",
-  cardName: 'card3' },
-  {imageUrl: "../images/fronts/minina4.svg",
-  cardName: 'card4' },
-  {imageUrl: "../images/fronts/minina5.svg",
-  cardName: 'card5' },
-  {imageUrl: "../images/fronts/minina6.svg",
-  cardName: 'card6' },
-  {imageUrl: "../images/fronts/minina7.svg",
-  cardName: 'card7' },
-  {imageUrl: "../images/fronts/minina8.svg",
-  cardName: 'card8' }
+  {image: "../images/fronts/minina1.svg"},
+  {image: "../images/fronts/minina2.svg"},
+  {image: "../images/fronts/minina3.svg"},
+  {image: "../images/fronts/minina4.svg"},
+  {image: "../images/fronts/minina5.svg"},
+  {image: "../images/fronts/minina6.svg"},
+  {image: "../images/fronts/minina7.svg"},
+  {image: "../images/fronts/minina8.svg"}
   ]
   
-  function generateCards() {
-    return mininaCards[Math.floor(Math.random() * mininaCards.length)]
-  }
+  // function generateCards() {
+  //   return mininaCards[Math.floor(Math.random() * mininaCards.length)]
+  // }
 /*-------------------------------- Constants --------------------------------*/
 
 /*---------------------------- Variables (state) ----------------------------*/
@@ -78,7 +70,7 @@ let winner, countdown, moves, cardMatch, cardToRemove, openCards
 //// Add event listener for card selection
 //// Add event listener for timer
 
-easyGame.addEventListener('click',() => console.log('easy game button clicked') )
+easyGame.addEventListener('click', initEasy)
 
 // mediumGame.addEventListener('click', initMedium)
 
@@ -87,9 +79,10 @@ easyGame.addEventListener('click',() => console.log('easy game button clicked') 
 // timerCountdown.addEventListener('',)
 
 
-for (let cardEl of cardEls) {
-  cardEl.addEventListener('click', handleClick)
-}
+
+cardEls.forEach((cardEl, idx) => {
+  cardEl.addEventListener('click', () => flipCard(idx));
+})
 
 resetBtnEl.addEventListener('click', initEasy)
 //make this singular
@@ -143,21 +136,22 @@ resetBtnEl.addEventListener('click', initEasy)
   function render() {
     cardContainer.innerHTML = ''
     mininaCards.forEach((card, idx) => {
-      loadCard(card, idx)
+      for (let i=0; i <2; i++) {
+        const newCard = document.createElement('div')
+        newCard.className = `card back-minina large shadow outline`
+        const cardId = `minina-card-${idx * 2+i}`
+        newCard.id = cardId
+        newCard.addEventListener('click', () => flipCard(idx));
+        cardContainer.appendChild(newCard)
+      }
+      
+
     })
-
-  function loadCard(card, idx) {
-    let newCard = document.createElement('div')
-    newCard.className = ``
-    newCard.innerHTML = 
-    ' <div id="minina-card" class="card back-minina large shadow outline"></div>'
-    cardContainer.appendChild(newCard)
   }
+  // // quotes.push(newQuote)
+  // // adjustFavicon(newQuote.isTaylor)
 
-  // quotes.push(newQuote)
-  // adjustFavicon(newQuote.isTaylor)
-
-  }
+  // }
 
 function shuffleCards(){
 }
@@ -169,52 +163,25 @@ function shuffleCards(){
 function updateMessage() {
 
 }
-  // create a function updateBoard
-    // invoke cardPicked function
-    // invoke matched function
-    // invoked unmatched function
-  // create function called updateMessage
-  // create timer function - will watch the video
-  // Add a favicon to the site
-
-
-function handleClick() {
-  flipCard()
-
-
-  const clickedCard = generateCards()
-  mininaCards.push(clickedCard)
-      // add rules so that previous card is removed before next click, otherwise more than one card will be flipped on next click
-      
-  console.log('card clicked')
-  // flipCard()
-  // checkCard()
 
 
 
-  // console.log('click works')
-  // create a function called handleClick with evt parameter
-    // update cardsEl so handleClick is invoked when card is clicked
+function flipCard(cardIdx) {
+  const cardFront = document.getElementById(`minina-card-${cardIdx}`);
 
+  if (cardFront) {
+    cardFront.classList.remove('back-minina');
+    cardFront.style.transform = 'rotateY(180deg)'
+    cardFront.style.backgroundImage = `url(${mininaCards[cardIdx % mininaCards.length].image})`;
+  }
 }
 
-function flipCard(){
-  //create element to get card to flip and generate 
-  // let selectedCard = document.querySelector('.card-container')
-  // cardEl.setAttribute {
-    
-  //   cardEl.innerHTML = 
-  //   ' <div class="card front-minina large shadow"></div>'
-  //   cardContainer.appendChild(cardEl))
-    // newCard.className = ``
-    // selectedCard.innerHTML = 
-    // ' <div class="card front-minina large shadow"></div>'
-    // cardContainer.appendChild(newCard)
-  // const clickedCard = generateCards()
-  // mininaCards.push(clickedCard)
+
+
+
   //     // add rules so that previous card is removed before next click, otherwise more than one card will be flipped on next click
       
-}
+
 function checkCard() {
 
   // cardEls.forEach((cardVal, idx){
@@ -242,14 +209,10 @@ function unmatched() {
 
 }
 
-function timerCountdown(){
+// function timerCountdown(){
+// }
 
-}
-// Add event listener to the board
 // add light mode dark mode
-
-
-
 // Write and export a function to access picture data
 // Import the function that will allow us access to the picture data (this lives under constants)
 // Test the function to make sure its working

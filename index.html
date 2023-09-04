@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/cardstarter.css">
-  <script defer src="./js/app.js"></script>
-  <title>Document</title>
+  <script src="./js/app.js" type="module"></script>
+  <script src="./js/data.js" type="module"></script>
 </head>
 <body>
   <h1> Minina Match Game </h1>
@@ -17,8 +18,10 @@
     <button class="difficulty" id="hard-game">Hard</button>
   </section>
   <h2>message</h2>
-  <div class="card-container"></div>
-  <div id="minina-card" class="card back-minina large shadow outline"></div>
-  <button id="reset-game"> Reset </button>
+  <div class="card-container">
+  <div id="card-selected" class="card back-minina large shadow outline"></div>
+
+</div>
+  <button id="reset-game"> Reset</button>
 </body>
 </html>

@@ -4,7 +4,29 @@
 
 // console.log('minina check')
 
-import { generateCards } from "../js/data.js"
+// import { generateCards } from "../js/data.js"
+const mininaCards = [ 
+  {imageUrl: "../images/fronts/minina1.svg",
+  cardName: 'card1' },
+  {imageUrl: "../images/fronts/minina2.svg",
+  cardName: 'card2' },
+  {imageUrl: "../images/fronts/minina3.svg",
+  cardName: 'card3' },
+  {imageUrl: "../images/fronts/minina4.svg",
+  cardName: 'card4' },
+  {imageUrl: "../images/fronts/minina5.svg",
+  cardName: 'card5' },
+  {imageUrl: "../images/fronts/minina6.svg",
+  cardName: 'card6' },
+  {imageUrl: "../images/fronts/minina7.svg",
+  cardName: 'card7' },
+  {imageUrl: "../images/fronts/minina8.svg",
+  cardName: 'card8' }
+  ]
+  
+  function generateCards() {
+    return mininaCards[Math.floor(Math.random() * mininaCards.length)]
+  }
 /*-------------------------------- Constants --------------------------------*/
 
 /*---------------------------- Variables (state) ----------------------------*/
@@ -35,10 +57,11 @@ let winner, countdown, moves, cardMatch, cardToRemove, openCards
   const resetBtnEl = document.getElementById('reset-game')
   //console.log('you reset the game')
   
-  cards = document.getElementById('minina-card')
+  const cardEls = document.querySelectorAll('#minina-card')
+  // const cardEls = document.getElementById('minina-card')
   //console.log('card container activated')
 
-  const cardContainer = document.querySelector('#card-container')
+  const cardContainer = document.querySelector('.card-container')
   
   /*----------------------------- Event Listeners -----------------------------*/
 
@@ -63,12 +86,12 @@ easyGame.addEventListener('click',() => console.log('easy game button clicked') 
 
 // timerCountdown.addEventListener('',)
 
+
+for (let cardEl of cardEls) {
+  cardEl.addEventListener('click', handleClick)
+}
+
 resetBtnEl.addEventListener('click', initEasy)
-
-cards.forEach(card =>{
-  card.addEventListener('click', handleClick)
-})
-
 //make this singular
 /*-------------------------------- Functions --------------------------------*/
 
@@ -117,26 +140,30 @@ cards.forEach(card =>{
   //   shuffleCards() // create shufflecard function
   // }
 
-  function render(cardPicked) {
-  //load cards
+  function render() {
+    cardContainer.innerHTML = ''
+    mininaCards.forEach((card, idx) => {
+      loadCard(card, idx)
+    })
 
-  // const newCard = getAllCards()
+  function loadCard(card, idx) {
+    let newCard = document.createElement('div')
+    newCard.className = ``
+    newCard.innerHTML = 
+    ' <div id="minina-card" class="card back-minina large shadow outline"></div>'
+    cardContainer.appendChild(newCard)
+  }
+
   // quotes.push(newQuote)
   // adjustFavicon(newQuote.isTaylor)
-  
-    //// Create a render function with a parameter cardpicked
-    // add rules so that previous card is removed before next click, otherwise more than one card will be flipped on next click
-    //// Invoke updateBoard & updateMessage functions within render function
-    
-    updateBoard()
-    updateMessage()
+
   }
 
 function shuffleCards(){
 }
-function updateBoard(init) {
+// function updateBoard(init) {
   
-}
+// }
 
 
 function updateMessage() {
@@ -153,18 +180,40 @@ function updateMessage() {
 
 function handleClick() {
   flipCard()
-  checkCard()
+
+
+  const clickedCard = generateCards()
+  mininaCards.push(clickedCard)
+      // add rules so that previous card is removed before next click, otherwise more than one card will be flipped on next click
+      
+  console.log('card clicked')
+  // flipCard()
+  // checkCard()
 
 
 
-  console.log('click works')
+  // console.log('click works')
   // create a function called handleClick with evt parameter
     // update cardsEl so handleClick is invoked when card is clicked
 
 }
 
 function flipCard(){
-  
+  //create element to get card to flip and generate 
+  // let selectedCard = document.querySelector('.card-container')
+  // cardEl.setAttribute {
+    
+  //   cardEl.innerHTML = 
+  //   ' <div class="card front-minina large shadow"></div>'
+  //   cardContainer.appendChild(cardEl))
+    // newCard.className = ``
+    // selectedCard.innerHTML = 
+    // ' <div class="card front-minina large shadow"></div>'
+    // cardContainer.appendChild(newCard)
+  // const clickedCard = generateCards()
+  // mininaCards.push(clickedCard)
+  //     // add rules so that previous card is removed before next click, otherwise more than one card will be flipped on next click
+      
 }
 function checkCard() {
 

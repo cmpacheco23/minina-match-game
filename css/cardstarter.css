@@ -84,7 +84,7 @@
   transform: rotateY(180deg);
 }
 
-.card.front, .back {
+/* .card.front, .back {
   backface-visibility: hidden;
   position: absolute;
   border-radius: 10px;
@@ -92,18 +92,25 @@
   left:0;
   height: 100%;
   width: 100%;
+} */
+
+
+.card.back-minina {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  background-image: url("../images/backs/minina.svg"); 
+  background-position: center center;
+  backface-visibility: hidden;
 }
+
 
 .card.front {
   display: flex;
   justify-content: center;
   align-items: center;
   transform: rotateY(180deg);
+  background-image: url("../js/app.js")
 }
-
-.card.back-minina {
-  background-image: url("../images/backs/minina.svg"); 
-  background-position: center center;
-  backface-visibility: hidden;}
-
   

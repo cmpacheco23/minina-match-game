@@ -1,4 +1,4 @@
-const cardDeck = [ 
+const mininaCards = [ 
 {imageUrl: "../images/fronts/minina1.svg",
 cardName: 'card1' },
 {imageUrl: "../images/fronts/minina2.svg",
@@ -18,7 +18,7 @@ cardName: 'card8' }
 ]
 
 function generateCards() {
-  return cardDeck[Math.floor(Math.random() * cardDeck.length)]
+  return mininaCards[Math.floor(Math.random() * mininaCards.length)]
 }
 
 export {

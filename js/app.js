@@ -26,7 +26,7 @@ const mininaCards = [
 //// Add variables that will determine the state of the game: board, winner, countdown, moves, matchedCard, cardToRemove, openCards
 
 let cards = []
-let winner, countdown, moves, cardMatch, cardToRemove, cardsToPlayGameWith
+let winner, countdown, moves, cardMatch, cardToRemove, cardsToPlayGameWith, matchesMade
 
 let openCards = []
 // set difficulty to a number and assign it to a constant for each level
@@ -102,7 +102,7 @@ resetBtnEl.addEventListener('click', initEasy)
    // timerCountdown =
     cardMatch = false
     winner = false
-    moves = 0 // create shufflecard function
+    moves = 32 // create shufflecard function
   }
   
   // function initMedium(){
@@ -128,7 +128,7 @@ resetBtnEl.addEventListener('click', initEasy)
 
 
   function generateDeck() {
-    console.log('deck')
+ //   console.log('deck')
     let cardsOut = []
     
     mininaCards.forEach((card) => {
@@ -147,7 +147,7 @@ resetBtnEl.addEventListener('click', initEasy)
   
 
 function cardsDisplayDesign(){
-  console.log('cardsdisplay')
+ // console.log('cardsdisplay')
   cardContainer.innerHTML = ''
     cardsToPlayGameWith.forEach((card, idx) => {
         const newCard = document.createElement('div')
@@ -176,7 +176,7 @@ function updateMessage() {
 
 
   function flipCard(evt) {
-    console.log(evt.target.id)
+ //   console.log(evt.target.id)
   
     const cardFront = document.getElementById(`${(evt.target.id)}`)
     
@@ -195,16 +195,15 @@ function updateMessage() {
     const cardUrl = cardsToPlayGameWith[idMod].image
     cardFront.style.backgroundImage = `url(${cardUrl})`
 
-    console.log(cardFront)
+    //console.log(cardFront)
 
     console.log(cardUrl)
     openCards.push(cardUrl)
-    console.log(openCards)
-      checkforMatch(evt)
+    console.log(openCards)      
+    checkforMatch()
     
     }
 
-    console.log(openCards)
 // to do list
   // have the first card not flip over
   // have any cardFront after the first card check for match
@@ -213,16 +212,23 @@ function updateMessage() {
   //     // add rules so that previous card is removed before next click, otherwise more than one card will be flipped on next click
       
 
-function checkforMatch(evt) {
+function checkforMatch() {
 
-
-  if (openCards.length < 2) {
-
+  if (openCards.length > 2) {
+    return
+} else if (openCards.length === 2) {
+  openCards[0] === openCards[1] ? cardMatch = true : cardMatch = false
+  console.log(cardMatch)
+  if (cardMatch) {
+    matchesMade += 1
+  
   } else {
-    //remove 
+    moves -= 1
   }
 }
 
+console.log(`matches made ${matchesMade} and moves left ${moves}` )
+}
 //console.log(openCards)
   
 

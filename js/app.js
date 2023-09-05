@@ -137,7 +137,6 @@ resetBtnEl.addEventListener('click', initEasy)
     })
     cardsToPlayGameWith = cardsOut
     console.log(cardsToPlayGameWith)
-    shuffleCards()
   }
 
   function render() {
@@ -149,10 +148,11 @@ resetBtnEl.addEventListener('click', initEasy)
 function cardsDisplayDesign(){
   console.log('cardsdisplay')
   cardContainer.innerHTML = ''
-    cardsToPlayGameWith.forEach((card) => {
+    cardsToPlayGameWith.forEach((card, idx) => {
         const newCard = document.createElement('div')
         newCard.className = `card back-minina large shadow outline`
-        newCard.addEventListener('click', flipCard);
+        newCard.id = `minina-card-${idx}`
+        newCard.addEventListener('click', flipCard)
         cardContainer.appendChild(newCard)
       })
 }
@@ -162,6 +162,8 @@ function cardsDisplayDesign(){
 function shuffleCards(){
   return cardsToPlayGameWith[Math.floor(Math.random() * cardsToPlayGameWith.length)]
 }
+
+//console.log(shuffleCards())
 // function updateBoard(init) {
   
 // }
@@ -171,26 +173,30 @@ function updateMessage() {
 
 }
 
-
-
-function flipCard(evt) {
-  console.log(evt.target)
-  const cardFront = document.getElementById(`minina-card-${card}`);
-
-  if (cardFront) {
-    cardFront.classList.remove('back-minina');
-    cardFront.style.transform = 'rotateY(180deg)'
-    cardFront.style.backgroundImage = `url(${mininaCards[card % mininaCards.length].image})`;
-    console.log('Clicked card id:', cardFront.id)
-  } 
-    checkforMatch()
+  function flipCard(evt) {
+    console.log(evt.target.id)
   
-  }
+    const cardFront = document.getElementById(`${(evt.target.id)}`)
+    
+    console.log(cardFront)
+    //console.log(cardFront)
+    cardFront.classList.remove(`back-minina`)
+    cardFront.style.transform = 'rotateY(180deg)'
 
 
-function checkForCard1(){
+    
+    cardFront.style.backgroundImage = `url(${cardsToPlayGameWith[evt.target.id % cardsToPlayGameWith.length].image})`
+    
+    
+    // `url(${cardsToPlayGameWith[evt.target.id % cardsToPlayGameWith.length].image})`
 
-}
+
+    // const cardFront = document.getElementById(`minina-card-${evt}`);
+  
+      checkforMatch()
+    
+    }
+
 // to do list
   // have the first card not flip over
   // have any cardFront after the first card check for match

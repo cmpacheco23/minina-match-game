@@ -26,9 +26,10 @@ const mininaCards = [
 //// Add variables that will determine the state of the game: board, winner, countdown, moves, matchedCard, cardToRemove, openCards
 
 let cards = []
-let winner, countdown, moves, cardMatch, cardToRemove, cardsToPlayGameWith, matchesMade
+let winner, countdown, moves, cardMatch, cardsToPlayGameWith, matchesMade
 
 let openCards = []
+let cardToRemove = []
 // set difficulty to a number and assign it to a constant for each level
 
 /*------------------------ Cached Element References ------------------------*/
@@ -100,6 +101,7 @@ resetBtnEl.addEventListener('click', initEasy)
     render()
 
    // timerCountdown =
+    matchesMade = 0 
     cardMatch = false
     winner = false
     moves = 32 // create shufflecard function
@@ -199,7 +201,7 @@ function updateMessage() {
 
     console.log(cardUrl)
     openCards.push(cardUrl)
-    console.log(openCards)      
+   // console.log(openCards)      
     checkforMatch()
     
     }
@@ -218,17 +220,24 @@ function checkforMatch() {
     return
 } else if (openCards.length === 2) {
   openCards[0] === openCards[1] ? cardMatch = true : cardMatch = false
-  console.log(cardMatch)
+console.log(cardMatch)
+console.log(openCards)
   if (cardMatch) {
     matchesMade += 1
-  
+    console.log(openCards)
   } else {
     moves -= 1
+    cardToRemove.push(openCards[1])
+    openCards.pop()
+    
+    console.log(cardToRemove)
+    console.log(openCards)
+  }
+  console.log(`matches made ${matchesMade} and moves left ${moves}` )
   }
 }
+//console.log(openCards)
 
-console.log(`matches made ${matchesMade} and moves left ${moves}` )
-}
 //console.log(openCards)
   
 
@@ -239,6 +248,9 @@ console.log(`matches made ${matchesMade} and moves left ${moves}` )
 
 
 function unmatched() {
+
+  // console.log(cardToRemove)
+  // console.log(openCards)
   // create function unmatched to handle cards that don't match
   // card needs to flip back over
   // remove a move

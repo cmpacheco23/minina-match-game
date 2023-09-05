@@ -26,8 +26,9 @@ const mininaCards = [
 //// Add variables that will determine the state of the game: board, winner, countdown, moves, matchedCard, cardToRemove, openCards
 
 let cards = []
-let winner, countdown, moves, cardMatch, cardToRemove, openCards, cardsToPlayGameWith
+let winner, countdown, moves, cardMatch, cardToRemove, cardsToPlayGameWith
 
+let openCards = []
 // set difficulty to a number and assign it to a constant for each level
 
 /*------------------------ Cached Element References ------------------------*/
@@ -173,27 +174,37 @@ function updateMessage() {
 
 }
 
+
   function flipCard(evt) {
     console.log(evt.target.id)
   
     const cardFront = document.getElementById(`${(evt.target.id)}`)
     
-    console.log(cardFront)
+    //console.log(cardFront)
     //console.log(cardFront)
     cardFront.classList.remove(`back-minina`)
     cardFront.style.transform = 'rotateY(180deg)'
-    cardFront.style.backgroundImage = `url(${cardsToPlayGameWith[evt.target.id % cardsToPlayGameWith.length].image})`
-    
-    
-    // `url(${cardsToPlayGameWith[evt.target.id % cardsToPlayGameWith.length].image})`
 
+    // console.log(cardsToPlayGameWith)
+    // console.log(evt.target.id)
 
-    // const cardFront = document.getElementById(`minina-card-${evt}`);
-  
-      checkforMatch()
+    const id = parseInt(evt.target.id.split('-')[2])
+
+    const idMod = id % cardsToPlayGameWith.length
+
+    const cardUrl = cardsToPlayGameWith[idMod].image
+    cardFront.style.backgroundImage = `url(${cardUrl})`
+
+    console.log(cardFront)
+
+    console.log(cardUrl)
+    openCards.push(cardUrl)
+    console.log(openCards)
+      checkforMatch(evt)
     
     }
 
+    console.log(openCards)
 // to do list
   // have the first card not flip over
   // have any cardFront after the first card check for match
@@ -202,9 +213,17 @@ function updateMessage() {
   //     // add rules so that previous card is removed before next click, otherwise more than one card will be flipped on next click
       
 
-function checkforMatch() {
-    
+function checkforMatch(evt) {
+
+
+  if (openCards.length < 2) {
+
+  } else {
+    //remove 
+  }
 }
+
+//console.log(openCards)
   
 
 

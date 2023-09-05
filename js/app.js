@@ -2,7 +2,7 @@
 //// Add a reset button to the html file
 //// Add a container element for cards to append to
 
-// console.log('minina check')
+console.log('minina check')
 
 // import { generateCards } from "../js/data.js"
 const mininaCards = [ 
@@ -28,6 +28,7 @@ const mininaCards = [
 let cards = []
 let winner, countdown, moves, cardMatch, cardToRemove, openCards
 
+// set difficulty to a number and assign it to a constant for each level
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -78,11 +79,9 @@ easyGame.addEventListener('click', initEasy)
 
 // timerCountdown.addEventListener('',)
 
-
-
-cardEls.forEach((cardEl, idx) => {
-  cardEl.addEventListener('click', () => flipCard(idx));
-})
+// cardEls.forEach((cardEl) => {
+//   cardEl.addEventListener('click', flipCard());
+// })
 
 resetBtnEl.addEventListener('click', initEasy)
 //make this singular
@@ -137,19 +136,15 @@ resetBtnEl.addEventListener('click', initEasy)
     cardContainer.innerHTML = ''
     mininaCards.forEach((card, idx) => {
       for (let i=0; i <2; i++) {
-        const newCard = document.createElement('div')
-        newCard.className = `card back-minina large shadow outline`
+        const newCards = document.createElement('div')
+        newCards.className = `card back-minina large shadow outline`
         const cardId = `minina-card-${idx * 2+i}`
-        newCard.id = cardId
-        newCard.addEventListener('click', () => flipCard(idx));
-        cardContainer.appendChild(newCard)
+        newCards.id = cardId
+        newCards.addEventListener('click', () => flipCard(idx));
+        cardContainer.appendChild(newCards)
       }
-      
-
     })
   }
-  // // quotes.push(newQuote)
-  // // adjustFavicon(newQuote.isTaylor)
 
   // }
 
@@ -166,31 +161,37 @@ function updateMessage() {
 
 
 
-function flipCard(cardIdx) {
-  const cardFront = document.getElementById(`minina-card-${cardIdx}`);
+function flipCard(card) {
+  const cardFront = document.getElementById(`minina-card-${card}`);
 
   if (cardFront) {
     cardFront.classList.remove('back-minina');
     cardFront.style.transform = 'rotateY(180deg)'
-    cardFront.style.backgroundImage = `url(${mininaCards[cardIdx % mininaCards.length].image})`;
+    cardFront.style.backgroundImage = `url(${mininaCards[card % mininaCards.length].image})`;
+    console.log('Clicked card id:', cardFront.id)
+  } 
+    checkforMatch()
+  
   }
+
+
+function checkForCard1(){
+
 }
-
-
+// to do list
+  // have the first card not flip over
+  // have any cardFront after the first card check for match
 
 
   //     // add rules so that previous card is removed before next click, otherwise more than one card will be flipped on next click
       
 
-function checkCard() {
+function checkforMatch() {
+  if (cardEls.id === cardEls.id) {
+    cardMatch = true
 
-  // cardEls.forEach((cardVal, idx){
-  //   if(cardVal[idx] === idx[0] || idx[1]) {
-  //     cardMatch = true
-  //   } else {
-  //     return unmatched()
-  //   }
-  // })
+  }
+
     
 }
   

@@ -2,10 +2,13 @@
 .card-container {
   display: grid;
   justify-content: center;
-  grid-gap: 16px;
-  grid-template-columns: repeat(4, 140px);
-  grid-template-rows: repeat(2, calc(140px / 2*4));
-  margin-top: 10px;
+  grid-gap: 2px;
+  grid-template-columns: repeat(4, 120px);
+  grid-template-rows: repeat(0, calc(80px / 2*4));
+  margin-top: 0px;
+  margin-bottom: 0px;
+  justify-content: space-evenly;
+  
 }
 
 .flipCard {

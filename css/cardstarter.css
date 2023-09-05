@@ -2,7 +2,7 @@
 .card {
   box-sizing: border-box;
   display: inline-block;
-  margin: 5px 5px 50px 5px;
+  margin: 5px 5px 10px 5px;
   cursor: pointer;
   /* Set the card's dimensions, and size it relative to
      it's font size. */
@@ -98,7 +98,6 @@
 .card.back-minina {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   justify-content: space-evenly;
   background-image: url("../images/backs/minina.svg"); 
   background-position: center center;
@@ -111,5 +110,6 @@
   justify-content: center;
   align-items: center;
   transform: rotateY(180deg);
+  background-position: center center;
 }
   

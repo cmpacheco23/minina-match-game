@@ -182,9 +182,6 @@ function updateMessage() {
     //console.log(cardFront)
     cardFront.classList.remove(`back-minina`)
     cardFront.style.transform = 'rotateY(180deg)'
-
-
-    
     cardFront.style.backgroundImage = `url(${cardsToPlayGameWith[evt.target.id % cardsToPlayGameWith.length].image})`
     
     

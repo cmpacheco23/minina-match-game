@@ -8,6 +8,12 @@
   
 } */
 
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(236, 205, 216);
+}
 
 .card-container {
   display: grid;

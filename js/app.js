@@ -26,7 +26,7 @@ const mininaCards = [
 //// Add variables that will determine the state of the game: board, winner, countdown, moves, matchedCard, cardToRemove, openCards
 
 let cards = []
-let winner, countdown, moves, cardMatch, cardToRemove, openCards
+let winner, countdown, moves, cardMatch, cardToRemove, openCards, cardsToPlayGameWith
 
 // set difficulty to a number and assign it to a constant for each level
 
@@ -60,12 +60,6 @@ let winner, countdown, moves, cardMatch, cardToRemove, openCards
 
   //// Add event listener for cardsEl, so only one card flips at a time when clicked: use a for of loop
 
-  // cardEls.forEach(cardEl => {
-  //   cardEl.addEventListener('click', console.log('yes'))
-  // });
-
-  //console.log(cardEl)
-// Add event listener for difficulty button
 
 //// Add event listener for reset button
 //// Add event listener for card selection
@@ -102,14 +96,12 @@ resetBtnEl.addEventListener('click', initEasy)
 
   function initEasy() {
     
+    render()
 
    // timerCountdown =
     cardMatch = false
     winner = false
-    moves = 0
-    render()
-    shuffleCards() // create shufflecard function
-  
+    moves = 0 // create shufflecard function
   }
   
   // function initMedium(){
@@ -132,23 +124,43 @@ resetBtnEl.addEventListener('click', initEasy)
   //   shuffleCards() // create shufflecard function
   // }
 
-  function render() {
-    cardContainer.innerHTML = ''
-    mininaCards.forEach((card, idx) => {
-      for (let i=0; i <2; i++) {
-        const newCards = document.createElement('div')
-        newCards.className = `card back-minina large shadow outline`
-        const cardId = `minina-card-${idx * 2+i}`
-        newCards.id = cardId
-        newCards.addEventListener('click', () => flipCard(idx));
-        cardContainer.appendChild(newCards)
-      }
+
+
+  function generateDeck() {
+    console.log('deck')
+    let cardsOut = []
+    
+    mininaCards.forEach((card) => {
+      cardsOut.push(card)
+      cardsOut.push(card)
+      //console.log(cardsOut)
     })
+    cardsToPlayGameWith = cardsOut
+    console.log(cardsToPlayGameWith)
+    shuffleCards()
   }
+
+  function render() {
+    generateDeck()
+    cardsDisplayDesign()
+    }
+  
+
+function cardsDisplayDesign(){
+  console.log('cardsdisplay')
+  cardContainer.innerHTML = ''
+    cardsToPlayGameWith.forEach((card) => {
+        const newCard = document.createElement('div')
+        newCard.className = `card back-minina large shadow outline`
+        newCard.addEventListener('click', flipCard);
+        cardContainer.appendChild(newCard)
+      })
+}
 
   // }
 
 function shuffleCards(){
+  return cardsToPlayGameWith[Math.floor(Math.random() * cardsToPlayGameWith.length)]
 }
 // function updateBoard(init) {
   
@@ -161,7 +173,8 @@ function updateMessage() {
 
 
 
-function flipCard(card) {
+function flipCard(evt) {
+  console.log(evt.target)
   const cardFront = document.getElementById(`minina-card-${card}`);
 
   if (cardFront) {
@@ -187,11 +200,6 @@ function checkForCard1(){
       
 
 function checkforMatch() {
-  if (cardEls.id === cardEls.id) {
-    cardMatch = true
-
-  }
-
     
 }
   

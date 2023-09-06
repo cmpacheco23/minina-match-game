@@ -73,6 +73,7 @@ function initEasy() {
   cardMatch = false
   winner = false
   moves = 32 
+  firstChoice = true
   render()
 }
   
@@ -87,6 +88,7 @@ function generateDeck() {
   cardsToPlayGameWith = cardsOut
   // is there where i invoke the shuffle function?
   console.log(cardsToPlayGameWith)
+  console.log(firstChoice)
 }
 
 function render() {
@@ -94,7 +96,6 @@ function render() {
   cardsDisplayDesign()
   // updateBoard()
   updateMessage()
-  removeUnmatchedCard()
   }
   
 function cardsDisplayDesign(){
@@ -115,30 +116,31 @@ function shuffleCards(){
 
 function flipCard(evt) {
  //   console.log(evt.target.id)
-  firstChoice = true
-  const cardFront = document.getElementById(`${(evt.target.id)}`)
+  console.log(firstChoice)
+    const cardFront = document.getElementById(`${(evt.target.id)}`)
     
     //console.log(cardFront)
     //console.log(cardFront)
-  cardFront.classList.remove(`back-minina`)
-  cardFront.style.transform = 'rotateY(180deg)'
-
+    cardFront.classList.remove(`back-minina`)
+    cardFront.style.transform = 'rotateY(180deg)'
+    
     // console.log(cardsToPlayGameWith)
     // console.log(evt.target.id)
-
-  const id = parseInt(evt.target.id.split('-')[2])
-
-  const idMod = id % cardsToPlayGameWith.length
-
-  const cardUrl = cardsToPlayGameWith[idMod].image
-  cardFront.style.backgroundImage = `url(${cardUrl})`
-
+    
+    const id = parseInt(evt.target.id.split('-')[2])
+    
+    const idMod = id % cardsToPlayGameWith.length
+    
+    const cardUrl = cardsToPlayGameWith[idMod].image
+    cardFront.style.backgroundImage = `url(${cardUrl})`
+    
     //console.log(cardFront)
-
-  console.log(cardUrl)
-  const fullCardInfo = {
-    dom:cardFront, url:cardUrl
-  }
+    
+    console.log(cardUrl)
+    const fullCardInfo = {
+      dom:cardFront, url:cardUrl
+    }
+  
   console.log(fullCardInfo)
   openCards.push(fullCardInfo)
    // console.log(openCards)      
@@ -148,9 +150,9 @@ function flipCard(evt) {
 }
 
 function checkforMatch() {
-
+console.log(openCards)
   if (openCards.length > 2) {
-    return
+    return 
 } else if (openCards.length === 2) {
   openCards[0].url === openCards[1].url ? cardMatch = true : cardMatch = false
 console.log(cardMatch)
@@ -220,28 +222,45 @@ console.log(cardToRemove)
 //     // console.log(cardToRemove)
 // }
 
-function removeUnmatchedCard() {
-  // not able to call this function in unMatched cards bc it gives an error
-  // not able to call this function in render for the same reason
-  // cardToRemove.pop() // doesn't remove from array console shows [] but the drop down shows an object of 1
-  // when it does remove the next card that is flipped does have unmatchedflip applied - it stays upward
-  // if i pass this back to the deck I need to remove the dom
-  // console.log(cardToRemove)
-    // remove the class name 
-     // remove card from card to remove --> cardToRemove.pop()
-}
-
 
 function updateMessage(){
+  if (firstChoice === true && openCards.length === 0) {
+     // should render intial state h2 message from html
+     // can i add a time out function?
+      setTimeout(function() {
+        messageEl.textContent = 'Select Your First Card'
+      },3000) 
+      console.log(openCards)
+  } else if (firstChoice === false && openCards.length === 1) {
+    messageEl.textContent = 'Select Your Next Card'
+  }
+  {
+  
+  }
+  
+  // if (openCards.length === 1){
+  //   messageEl.textContent = 'Select Your Next Card'
+  //   console.log(openCards)
+  //   //Object.keys(openCards).length
+  //   // not displaying
+  //   // why is my h2 not changing when there is one card in the object openCards
 
-  console.log('messageworks')
 
-  if (openCards) {
+  // } else if (openCards.length === 2) {
+  //   if (cardMatch === true) {
+  //     messageEl.textContent = "Congrats You've got a match!"
+  //   } else if(cardMatch === false) {
+  //     messageEl.textContent = "Nice try, not a match - try again!!"
+  //   }
+  // }
+  
+
+  
 
   }
 // if open cards has only 1 card message changes to make your next selection
     // messageEl.textContent = `Make your next selection!`
-  }
+  
 // if opencards has 2 items and cardMatch is false   change message to say 'oh no, you just missed it, try again, you lost a move!'
 
 // if open cards has 2 items but cardMatch is true change message to say woohoo you got a match!

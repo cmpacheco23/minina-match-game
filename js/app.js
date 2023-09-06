@@ -1,7 +1,3 @@
-//// Add html buttons one for each dificulty level
-//// Add a reset button to the html file
-//// Add a container element for cards to append to
-
 console.log('minina check')
 
 // import { generateCards } from "../js/data.js"
@@ -16,14 +12,11 @@ const mininaCards = [
   {image: "../images/fronts/minina8.svg"}
   ]
   
-  // function generateCards() {
-  //   return mininaCards[Math.floor(Math.random() * mininaCards.length)]
-  // }
+
 /*-------------------------------- Constants --------------------------------*/
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-//// Add variables that will determine the state of the game: board, winner, countdown, moves, matchedCard, cardToRemove, openCards
 
 let cards = []
 let winner, countdown, moves, cardMatch, cardsToPlayGameWith, matchesMade, firstChoice
@@ -35,13 +28,6 @@ let completedMatches = []
 
 /*------------------------ Cached Element References ------------------------*/
 
-
-//// Add cache reference for dificulty buttons
-//// Add cache reference for reset button
-//// Add cache reference for container element
-//// Add a constant variable cardsEls that will store the cards needed, their number will be adjusted at each level
-//// Add cache reference for cardsEls
-
   const easyGame = document.getElementById('easy-game')
   const mediumGame = document.getElementById('medium-game')
   const hardGame = document.getElementById('hard-game')
@@ -52,6 +38,7 @@ let completedMatches = []
   const timeLeft = document.getElementById('timer')
   const movesLeft = document.getElementById('moves')
   const matchesObtained = document.getElementById('match')
+
   /*----------------------------- Event Listeners -----------------------------*/
 
 
@@ -78,96 +65,87 @@ resetBtnEl.addEventListener('click', initEasy)
   // initMedium()
   // initHard()
 
-  function initEasy() {
+function initEasy() {
     
     
-    // timerCountdown =
-    matchesMade = 0 
-    cardMatch = false
-    winner = false
-    moves = 32 
-    render()
-  }
+  // timerCountdown =
+  matchesMade = 0 
+  cardMatch = false
+  winner = false
+  moves = 32 
+  render()
+}
   
 
-  function generateDeck() {
-    let cardsOut = []
+function generateDeck() {
+  let cardsOut = []
     
-    mininaCards.forEach((card) => {
-      cardsOut.push(card)
-      cardsOut.push(card)
-    })
-    cardsToPlayGameWith = cardsOut
-    console.log(cardsToPlayGameWith)
+  mininaCards.forEach((card) => {
+    cardsOut.push(card)
+    cardsOut.push(card)
+  })
+  cardsToPlayGameWith = cardsOut
+  // is there where i invoke the shuffle function?
+  console.log(cardsToPlayGameWith)
+}
+
+function render() {
+  generateDeck()
+  cardsDisplayDesign()
+  // updateBoard()
+  updateMessage()
+  removeUnmatchedCard()
   }
-
-  function render() {
-    generateDeck()
-    cardsDisplayDesign()
-    // updateBoard()
-    updateMessage()
-    }
   
-
 function cardsDisplayDesign(){
  // console.log('cardsdisplay')
   cardContainer.innerHTML = ''
-    cardsToPlayGameWith.forEach((card, idx) => {
-        const newCard = document.createElement('div')
-        newCard.className = `card back-minina large shadow outline`
-        newCard.id = `minina-card-${idx}`
-        newCard.addEventListener('click', flipCard)
-        cardContainer.appendChild(newCard)
-      })
+  cardsToPlayGameWith.forEach((card, idx) => {
+      const newCard = document.createElement('div')
+      newCard.className = `card back-minina large shadow outline`
+      newCard.id = `minina-card-${idx}`
+      newCard.addEventListener('click', flipCard)
+      cardContainer.appendChild(newCard)
+    })
 }
-
-
 
 function shuffleCards(){
   return cardsToPlayGameWith[Math.floor(Math.random() * cardsToPlayGameWith.length)]
 }
 
-
-  function flipCard(evt) {
+function flipCard(evt) {
  //   console.log(evt.target.id)
-    firstChoice = true
-    const cardFront = document.getElementById(`${(evt.target.id)}`)
+  firstChoice = true
+  const cardFront = document.getElementById(`${(evt.target.id)}`)
     
     //console.log(cardFront)
     //console.log(cardFront)
-    cardFront.classList.remove(`back-minina`)
-    cardFront.style.transform = 'rotateY(180deg)'
+  cardFront.classList.remove(`back-minina`)
+  cardFront.style.transform = 'rotateY(180deg)'
 
     // console.log(cardsToPlayGameWith)
     // console.log(evt.target.id)
 
-    const id = parseInt(evt.target.id.split('-')[2])
+  const id = parseInt(evt.target.id.split('-')[2])
 
-    const idMod = id % cardsToPlayGameWith.length
+  const idMod = id % cardsToPlayGameWith.length
 
-    const cardUrl = cardsToPlayGameWith[idMod].image
-    cardFront.style.backgroundImage = `url(${cardUrl})`
+  const cardUrl = cardsToPlayGameWith[idMod].image
+  cardFront.style.backgroundImage = `url(${cardUrl})`
 
     //console.log(cardFront)
 
-    console.log(cardUrl)
-    const fullCardInfo = {
-      dom:cardFront, url:cardUrl
-    }
-    openCards.push(fullCardInfo)
+  console.log(cardUrl)
+  const fullCardInfo = {
+    dom:cardFront, url:cardUrl
+  }
+  console.log(fullCardInfo)
+  openCards.push(fullCardInfo)
    // console.log(openCards)      
-    firstChoice = false
-    checkforMatch()
+  firstChoice = false
+  checkforMatch()
     
-    }
-
-// to do list
-  // have the first card not flip over
-  // have any cardFront after the first card check for match
-
-
-  //     // add rules so that previous card is removed before next click, otherwise more than one card will be flipped on next click
-      
+}
 
 function checkforMatch() {
 
@@ -176,7 +154,7 @@ function checkforMatch() {
 } else if (openCards.length === 2) {
   openCards[0].url === openCards[1].url ? cardMatch = true : cardMatch = false
 console.log(cardMatch)
-console.log(openCards)
+
   if (cardMatch) {
     matchesMade += 1
     matchesObtained.textContent = matchesMade
@@ -188,7 +166,16 @@ console.log(openCards)
     moves -= 1
     // might need to parseInt this
     movesLeft.textContent = moves
-    cardToRemove.push(openCards[1])
+    console.log(openCards[1].dom)
+    
+    setTimeout(function() {
+      
+      openCards[1].dom.style.transform = 'rotateY(-180deg)'
+      openCards[1].dom.style.backgroundImage =`url(${"../images/backs/minina.svg"})`
+      },4000) 
+
+    // cardToRemove.push(openCards[1])
+    //remove the background here instead of pushing the cards
     openCards.pop()
     
     // console.log(cardToRemove)
@@ -196,7 +183,7 @@ console.log(openCards)
   }
   console.log(`matches made ${matchesMade} and moves left ${moves}` )
   }
-  unmatchedCardFlip()
+  // unmatchedCardFlip()
 }
 
 
@@ -210,43 +197,38 @@ console.log(openCards)
   // create a function checkCard 
     // will check `if` opened card is a match
     // if open card isnt a match it will flip the card over and remove a move
+console.log(cardToRemove)
+    
+// function unmatchedCardFlip() {
+//       //goals of this function
+//       // houses cardsToRemove
+//       //// step 1: set a delay through function setTimeOut
+//       //// step 2: turn card back around 'transform dom element'
+//       //// step 3: change background to back of card
+//         // questions - do I need to remove the current background first?
+//       // step 4: remove the class of the one card in cardToRemove so it doesn't cause issues with future cards - do I need to do this? bc it doesn't cause issues with future cards?
+//       // step 5: empty out the cardsToRemove array
+//       //issue appears when I add code after this function
+//       //function must live inside function to work
+//   setTimeout(function() {
+//     cardToRemove[0].dom.style.transform = 'rotateY(-180deg)'
+//     cardToRemove[0].dom.style.backgroundImage = `url(${"../images/backs/minina.svg"})`
+//     },4000) 
+  
+//     // console.log(cardToRemove)
+// }
 
-    
-function unmatchedCardFlip() {
-      //goals of this function
-      // houses cardsToRemove
-      //// step 1: set a delay through function setTimeOut
-      //// step 2: turn card back around 'transform dom element'
-      //// step 3: change background to back of card
-        // questions - do I need to remove the current background first?
-      // step 4: remove the class of the one card in cardToRemove so it doesn't cause issues with future cards - do I need to do this? bc it doesn't cause issues with future cards?
-      // step 5: empty out the cardsToRemove array
-      //issue appears when I add code after this function
-      //function must live inside function to work
-      
-  setTimeout(function() {
-    cardToRemove[0].dom.style.transform = 'rotateY(-180deg)'
-    cardToRemove[0].dom.style.backgroundImage = `url(${"../images/backs/minina.svg"})`
-    },4000) 
-    
-    // console.log(cardToRemove)
-}
-    
 function removeUnmatchedCard() {
-  cardToRemove.pop()
+  // not able to call this function in unMatched cards bc it gives an error
+  // not able to call this function in render for the same reason
+  // cardToRemove.pop() // doesn't remove from array console shows [] but the drop down shows an object of 1
+  // when it does remove the next card that is flipped does have unmatchedflip applied - it stays upward
+  // if i pass this back to the deck I need to remove the dom
+  // console.log(cardToRemove)
     // remove the class name 
      // remove card from card to remove --> cardToRemove.pop()
 }
 
-  // console.log(cardToRemove[0].dom)
-    // transform cards rotate 180Y
-    // use pop method to clear cardsToRemove array
-
-  // function updateBoard() {
-    //probably dont need this function
-  //   console.log('board updates in console')
-    
-  // }
 
 function updateMessage(){
 

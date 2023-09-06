@@ -26,7 +26,7 @@ const mininaCards = [
 //// Add variables that will determine the state of the game: board, winner, countdown, moves, matchedCard, cardToRemove, openCards
 
 let cards = []
-let winner, countdown, moves, cardMatch, cardsToPlayGameWith, matchesMade
+let winner, countdown, moves, cardMatch, cardsToPlayGameWith, matchesMade, firstChoice
 
 let openCards = []
 let cardToRemove = []
@@ -57,6 +57,8 @@ let cardToRemove = []
   //console.log('card container activated')
 
   const cardContainer = document.querySelector('.card-container')
+
+  const messageEl = document.getElementById('new-message')
   
   /*----------------------------- Event Listeners -----------------------------*/
 
@@ -98,13 +100,13 @@ resetBtnEl.addEventListener('click', initEasy)
 
   function initEasy() {
     
-    render()
-
-   // timerCountdown =
+    
+    // timerCountdown =
     matchesMade = 0 
     cardMatch = false
     winner = false
     moves = 32 // create shufflecard function
+    render()
   }
   
   // function initMedium(){
@@ -145,6 +147,7 @@ resetBtnEl.addEventListener('click', initEasy)
   function render() {
     generateDeck()
     cardsDisplayDesign()
+    updateMessage()
     }
   
 
@@ -172,14 +175,10 @@ function shuffleCards(){
 // }
 
 
-function updateMessage() {
-
-}
-
 
   function flipCard(evt) {
  //   console.log(evt.target.id)
-  
+    firstChoice = true
     const cardFront = document.getElementById(`${(evt.target.id)}`)
     
     //console.log(cardFront)
@@ -200,8 +199,12 @@ function updateMessage() {
     //console.log(cardFront)
 
     console.log(cardUrl)
-    openCards.push(cardUrl)
+    const fullCardInfo = {
+      dom:cardFront, url:cardUrl
+    }
+    openCards.push(fullCardInfo)
    // console.log(openCards)      
+    firstChoice = false
     checkforMatch()
     
     }
@@ -219,7 +222,7 @@ function checkforMatch() {
   if (openCards.length > 2) {
     return
 } else if (openCards.length === 2) {
-  openCards[0] === openCards[1] ? cardMatch = true : cardMatch = false
+  openCards[0].url === openCards[1].url ? cardMatch = true : cardMatch = false
 console.log(cardMatch)
 console.log(openCards)
   if (cardMatch) {
@@ -230,11 +233,12 @@ console.log(openCards)
     cardToRemove.push(openCards[1])
     openCards.pop()
     
-    console.log(cardToRemove)
-    console.log(openCards)
+    // console.log(cardToRemove)
+    // console.log(openCards)
   }
   console.log(`matches made ${matchesMade} and moves left ${moves}` )
   }
+  unmatchedCardFlip()
 }
 //console.log(openCards)
 
@@ -245,10 +249,38 @@ console.log(openCards)
   // create a function checkCard 
     // will check `if` opened card is a match
     // if open card isnt a match it will flip the card over and remove a move
+    function unmatchedCardFlip() {
+      
+      // add a time outfunction
+      // setTimeout(functionToExecute, timeoutInMilliseconds)
+      
+      setTimeout(function() {
 
+        cardToRemove[0].dom.style.transform = 'rotateY(-180deg)'
+        cardToRemove[0].dom.style.backgroundImage = `url(${"../images/backs/minina.svg"})`
 
-function unmatched() {
+      },4000) 
+      
 
+      // cardToRemove.pop()
+      // console.log(cardToRemove)
+
+    }
+    
+    function removeUnmatchedCard(evt) {
+
+  
+      cardToRemove.pop()
+    }
+
+  // console.log(cardToRemove[0].dom)
+    // transform cards rotate 180Y
+    // use pop method to clear cardsToRemove array
+
+  // console.log(notMatch)
+  // cardToRemove.style.transform = 'rotateY(180deg)'
+  // cardFront.classList.remove(`back-minina`)
+  // cardFront.style.transform = 'rotateY(180deg)'
   // console.log(cardToRemove)
   // console.log(openCards)
   // create function unmatched to handle cards that don't match
@@ -256,7 +288,22 @@ function unmatched() {
   // remove a move
   // render a message that says oh no that's not it
 
-}
+
+function updateMessage(){
+
+  console.log('messageworks')
+
+  if (openCards) {
+
+  }
+// if open cards has only 1 card message changes to make your next selection
+    // messageEl.textContent = `Make your next selection!`
+  }
+// if opencards has 2 items and cardMatch is false   change message to say 'oh no, you just missed it, try again, you lost a move!'
+
+// if open cards has 2 items but cardMatch is true change message to say woohoo you got a match!
+
+// messageEl.textContent = `It's ${cardMatch === true ? 'Nice work, you got a match!':'oh no, you just missed it, try again!'}`
 
 // function timerCountdown(){
 // }

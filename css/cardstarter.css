@@ -106,6 +106,9 @@
   backface-visibility: hidden;
 }
 
+.card.flip-back{
+  background-image: url("../images/backs/minina.svg"); 
+}
 
 .card.front {
   display: flex;

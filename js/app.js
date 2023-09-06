@@ -166,17 +166,19 @@ console.log(cardMatch)
     moves -= 1
     // might need to parseInt this
     movesLeft.textContent = moves
-    console.log(openCards[1].dom)
+    console.log(openCards)
     
     setTimeout(function() {
-      
       openCards[1].dom.style.transform = 'rotateY(-180deg)'
       openCards[1].dom.style.backgroundImage =`url(${"../images/backs/minina.svg"})`
-      },4000) 
-
+      openCards.splice(1,1)
+    },4000) 
+    
+    console.log(openCards)
+  
     // cardToRemove.push(openCards[1])
     //remove the background here instead of pushing the cards
-    openCards.pop()
+    //openCards.pop()
     
     // console.log(cardToRemove)
     // console.log(openCards)

@@ -19,11 +19,12 @@ const mininaCards = [
 
 
 let cards = []
-let winner, countdown, moves, cardMatch, cardsToPlayGameWith, matchesMade, firstChoice
+let winner, countdown, moves, cardMatch, cardsToPlayGameWith, matchesMade, firstChoice, isTimeLeft 
 
 let openCards = []
 let cardToRemove = []
 let completedMatches = []
+
 // set difficulty to a number and assign it to a constant for each level
 
 /*------------------------ Cached Element References ------------------------*/
@@ -75,6 +76,7 @@ function initEasy() {
   moves = 32 
   firstChoice = true
   render()
+  
 }
   
 
@@ -115,6 +117,8 @@ function shuffleCards(){
 }
 
 function flipCard(evt) {
+  isTimeLeft = true
+  //add a condition that starts timer or call timer here!
  //   console.log(evt.target.id)
   console.log(firstChoice)
     const cardFront = document.getElementById(`${(evt.target.id)}`)
@@ -254,18 +258,36 @@ function updateMessage(){
   //   }
   // }
   
-
+  // if open cards has only 1 card message changes to make your next selection
+      // messageEl.textContent = `Make your next selection!`
+    
+  // if opencards has 2 items and cardMatch is false   change message to say 'oh no, you just missed it, try again, you lost a move!'
   
+  // if open cards has 2 items but cardMatch is true change message to say woohoo you got a match!
+  
+  // messageEl.textContent = `It's ${cardMatch === true ? 'Nice work, you got a match!':'oh no, you just missed it, try again!'}`
 
   }
-// if open cards has only 1 card message changes to make your next selection
-    // messageEl.textContent = `Make your next selection!`
+
+function isWinner(){
+  if (initEasy) {
+    if (matchesMade === 32 && moves !== 0 && isTimeLeft === true) // also add isTimeLeft{
+      winner = true
+    } else if(matchesMade !== 32) {
+      if (moves === 0) {
+        winner = false
+      } else if (isTimeLeft === false) {
+        winner = false 
+      } else if (moves === 0 && isTimeLeft === false ) {
+      winner = false
+    } else if (moves === 0 && matchesMade === 0) {
+      winner = false
+    } else if (isTimeLeft === false && moves === 0) {
+      winner = false
+    }
+  }
+}
   
-// if opencards has 2 items and cardMatch is false   change message to say 'oh no, you just missed it, try again, you lost a move!'
-
-// if open cards has 2 items but cardMatch is true change message to say woohoo you got a match!
-
-// messageEl.textContent = `It's ${cardMatch === true ? 'Nice work, you got a match!':'oh no, you just missed it, try again!'}`
 
 // function timerCountdown(){
 // }

@@ -30,3 +30,24 @@ body {
 .flipCard {
   transform: rotateX(180deg);
 }
+
+.game-header-updates {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+  width: 300px
+}
+
+h4#timer-header{
+  margin-right: 10px;
+  text-align: center;
+}
+h4#moves-header{
+  margin-left: 10px;
+}
+
+p {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

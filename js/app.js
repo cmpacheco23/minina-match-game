@@ -30,6 +30,7 @@ let winner, countdown, moves, cardMatch, cardsToPlayGameWith, matchesMade, first
 
 let openCards = []
 let cardToRemove = []
+let completedMatches = []
 // set difficulty to a number and assign it to a constant for each level
 
 /*------------------------ Cached Element References ------------------------*/
@@ -103,7 +104,7 @@ resetBtnEl.addEventListener('click', initEasy)
   function render() {
     generateDeck()
     cardsDisplayDesign()
-    updateBoard()
+    // updateBoard()
     updateMessage()
     }
   
@@ -179,6 +180,9 @@ console.log(openCards)
   if (cardMatch) {
     matchesMade += 1
     matchesObtained.textContent = matchesMade
+    completedMatches = openCards.slice(0,2) // use slice to move matched cards from one array into another
+    openCards.splice(0,2) // use splice to remove all matched cards 
+    console.log(completedMatches)
     console.log(openCards)
   } else {
     moves -= 1
@@ -206,39 +210,43 @@ console.log(openCards)
   // create a function checkCard 
     // will check `if` opened card is a match
     // if open card isnt a match it will flip the card over and remove a move
-  function unmatchedCardFlip() {
+
+    
+function unmatchedCardFlip() {
       //goals of this function
       // houses cardsToRemove
-      // step 1: set a delay through function setTimeOut
-      // step 2: turn card back around 'transform dom element'
-      // step 3: change background to back of card
+      //// step 1: set a delay through function setTimeOut
+      //// step 2: turn card back around 'transform dom element'
+      //// step 3: change background to back of card
         // questions - do I need to remove the current background first?
       // step 4: remove the class of the one card in cardToRemove so it doesn't cause issues with future cards - do I need to do this? bc it doesn't cause issues with future cards?
       // step 5: empty out the cardsToRemove array
+      //issue appears when I add code after this function
+      //function must live inside function to work
       
-    setTimeout(function() {
-        //issue went away and is no longer rendering
-      cardToRemove[0].dom.style.transform = 'rotateY(-180deg)'
-      cardToRemove[0].dom.style.backgroundImage = `url(${"../images/backs/minina.svg"})`
+  setTimeout(function() {
+    cardToRemove[0].dom.style.transform = 'rotateY(-180deg)'
+    cardToRemove[0].dom.style.backgroundImage = `url(${"../images/backs/minina.svg"})`
     },4000) 
-      
-      // console.log(cardToRemove)
-
-  }
     
-  function removeUnmatchedCard(evt) {
-      // remove the class name 
-      // remove card from card to remove --> cardToRemove.pop()
-  }
+    // console.log(cardToRemove)
+}
+    
+function removeUnmatchedCard() {
+  cardToRemove.pop()
+    // remove the class name 
+     // remove card from card to remove --> cardToRemove.pop()
+}
 
   // console.log(cardToRemove[0].dom)
     // transform cards rotate 180Y
     // use pop method to clear cardsToRemove array
 
-  function updateBoard() {
-    console.log('board updates in console')
+  // function updateBoard() {
+    //probably dont need this function
+  //   console.log('board updates in console')
     
-  }
+  // }
 
 function updateMessage(){
 

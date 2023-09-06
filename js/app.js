@@ -48,7 +48,9 @@ let cardToRemove = []
   const cardEls = document.querySelectorAll('#minina-card')
   const cardContainer = document.querySelector('.card-container')
   const messageEl = document.getElementById('new-message')
-  
+  const timeLeft = document.getElementById('timer')
+  const movesLeft = document.getElementById('moves')
+  const matchesObtained = document.getElementById('match')
   /*----------------------------- Event Listeners -----------------------------*/
 
 
@@ -101,6 +103,7 @@ resetBtnEl.addEventListener('click', initEasy)
   function render() {
     generateDeck()
     cardsDisplayDesign()
+    updateBoard()
     updateMessage()
     }
   
@@ -175,9 +178,12 @@ console.log(cardMatch)
 console.log(openCards)
   if (cardMatch) {
     matchesMade += 1
+    matchesObtained.textContent = matchesMade
     console.log(openCards)
   } else {
     moves -= 1
+    // might need to parseInt this
+    movesLeft.textContent = moves
     cardToRemove.push(openCards[1])
     openCards.pop()
     
@@ -189,6 +195,7 @@ console.log(openCards)
   unmatchedCardFlip()
 }
 
+
 // if cards are a match - I need to move those two cards into another array called completedMatches
 //console.log(openCards)
 
@@ -199,7 +206,7 @@ console.log(openCards)
   // create a function checkCard 
     // will check `if` opened card is a match
     // if open card isnt a match it will flip the card over and remove a move
-    function unmatchedCardFlip() {
+  function unmatchedCardFlip() {
       //goals of this function
       // houses cardsToRemove
       // step 1: set a delay through function setTimeOut
@@ -209,25 +216,29 @@ console.log(openCards)
       // step 4: remove the class of the one card in cardToRemove so it doesn't cause issues with future cards - do I need to do this? bc it doesn't cause issues with future cards?
       // step 5: empty out the cardsToRemove array
       
-      setTimeout(function() {
+    setTimeout(function() {
         //issue went away and is no longer rendering
-        cardToRemove[0].dom.style.transform = 'rotateY(-180deg)'
-        cardToRemove[0].dom.style.backgroundImage = `url(${"../images/backs/minina.svg"})`
-      },4000) 
+      cardToRemove[0].dom.style.transform = 'rotateY(-180deg)'
+      cardToRemove[0].dom.style.backgroundImage = `url(${"../images/backs/minina.svg"})`
+    },4000) 
       
       // console.log(cardToRemove)
 
-    }
+  }
     
-    function removeUnmatchedCard(evt) {
+  function removeUnmatchedCard(evt) {
       // remove the class name 
       // remove card from card to remove --> cardToRemove.pop()
-    }
+  }
 
   // console.log(cardToRemove[0].dom)
     // transform cards rotate 180Y
     // use pop method to clear cardsToRemove array
 
+  function updateBoard() {
+    console.log('board updates in console')
+    
+  }
 
 function updateMessage(){
 

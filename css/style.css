@@ -35,17 +35,15 @@ body {
   display: flex;
   justify-content: space-evenly;
   text-align: center;
-  width: 300px
+  width: 400px
 }
 
-h4#timer-header{
-  margin-right: 10px;
+
+
+h4{
   text-align: center;
+  
 }
-h4#moves-header{
-  margin-left: 10px;
-}
-
 p {
   display: flex;
   flex-direction: column;

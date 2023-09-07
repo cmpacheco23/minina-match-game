@@ -1,5 +1,6 @@
 # Minina's Matchup Adventure
 
+![Screenshot of a card matching game with colorful cat-themed cards laid out in a grid.](./images/game-screenshot.png)
 ### Background:
 **"Minina's Matchup Adventure"** was conceived out of a passion for memory games and a desire to showcase the charm of my cat, Minina. This game embodies a perfect fusion of these two elements, offering an engaging and delightful experience.
 

@@ -19,7 +19,7 @@ const mininaCards = [
 
 
 let cards = []
-let winner, countdown, moves, cardMatch, cardsToPlayGameWith, matchesMade, firstChoice, isTimeLeft 
+let winner, countdown, moves, cardMatch, cardsToPlayGameWith, matchesMade, firstChoice, isTimeLeft, matchesComplete 
 
 let openCards = []
 let cardToRemove = []
@@ -75,6 +75,7 @@ function initEasy() {
   winner = false
   moves = 32 
   firstChoice = true
+  matchesComplete = false
   render()
   
 }
@@ -225,14 +226,14 @@ function noCardsSelecMessage(){
   }
 }
 
-function winMessage(){
-  console.log(winner)
-  if (winner === true) {
-    messageEl.textContent = 'Congrats You Won!'
-    console.log(winner)
-    console.log(winMessage)
-}
-}
+// function winMessage(){
+//   console.log(winner)
+//   if (winner === true) {
+//     messageEl.textContent = 'Congrats You Won!'
+//     console.log(winner)
+//     console.log(winMessage)
+// }
+// }
 
 // function updateMessage(){
 
@@ -273,26 +274,39 @@ function winMessage(){
 
 
 
-function isWinner(){
+function isWinnerTrue(){
   if (initEasy) {
-    if (matchesMade === 8 && moves !== 0 && completedMatches === 8) // also add isTimeLeft{ //  === true
-      winner = true
-      winMessage()
-    } else if(matchesMade !== 32) {
-      if (moves === 0) {
+    if (moves !== 0 || isTimeLeft !== false) {
+      if (completedMatches === 16 || matchesMade === 8){
+          matchesComplete = true
+          winner = true 
+        } if (winner === true) {
+          messageEl.textContent = 'Congrats You Won!'
+        }
+        }
+    } else {
+      isWinnerFalse()
+    }
+  }
+  
+
+
+function isWinnerFalse(){
+  if (initEasy) {
+    if (matchesMade !== 8 || completedMatches !== 16) {
+      if (moves === 0 ) {
         winner = false
       } else if (isTimeLeft === false) {
         winner = false 
-      } else if (moves === 0 && isTimeLeft === false ) {
-      winner = false
-    } else if (moves === 0 && matchesMade === 0) {
-      winner = false
-    } else if (isTimeLeft === false && moves === 0) {
-      winner = false
+      } else {
+        return
+      }
     }
   }
+  //add next level here
 }
-  
+
+
 
 // function timerCountdown(){
 // }

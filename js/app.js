@@ -82,7 +82,7 @@ function initEasy() {
   movesLeft.textContent = `${moves = 16}`
   firstChoice = true
   matchesComplete = false
-  timeLeft = 15
+  timeLeft = 200
   expectedMatches = 8
   render()
   isTimeLeft = true
@@ -139,6 +139,10 @@ function cardsDisplayDesign(){
 function shuffleCards(){
   return cardsToPlayGameWith[Math.floor(Math.random() * cardsToPlayGameWith.length)]
 }
+
+// function shuffleCards(){
+//   return mininaCards[Math.floor(Math.random() * mininaCards.length)]
+// }
 
 function flipCard(evt) {
   

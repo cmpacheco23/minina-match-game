@@ -1,9 +1,8 @@
-let winSound = new Audio ('./sounds/slot-win.wav')
+let winSound = new Audio ('./sounds/slot-win-short.wav')
 let isHissing = new Audio ('./sounds/hiss.wav')
 let isPurring = new Audio ('./sounds/purr.wav')
 let winSoundv2 = new Audio ('./sounds/win-song.wav')
 let timeOut = new Audio ('./sounds/alarm.wav')
-// sound for time ran out
 // out of moves
 
 function playIsHissing () {
@@ -17,7 +16,7 @@ function playWinSound () {
 }
 
 function playIsPurring () {
-  isPurring.volume = 0.25
+  isPurring.volume = 0.30
   isPurring.play()
 }
 
@@ -27,7 +26,7 @@ function playWinSoundTwo () {
 }
 
 function playTimerSound () {
-  timeOut.volume = 0.25
+  timeOut.volume = 0.10
   timeOut.play()
 }
 

@@ -1,4 +1,5 @@
 
+import * as gameAudio from './audio.js'
 
 // import { generateCards } from "../js/data.js"
 const mininaCards = [ 
@@ -43,6 +44,7 @@ let completedMatches = []
   const timeRemaining = document.getElementById('timer')
   const movesLeft = document.getElementById('moves')
   const matchesObtained = document.getElementById('match')
+  const favicon = document.getElementById('favicon')
 
   /*----------------------------- Event Listeners -----------------------------*/
 
@@ -97,6 +99,7 @@ let timer = setInterval(function() {
     //call the
     timeRemaining.textContent = `Time's Up`
     messageEl.textContent = 'You ran out of time, better luck next time!'
+    gameAudio.playTimerSound()
   }
 }, 1000)
 
@@ -214,12 +217,14 @@ function checkforMatch() {
 function matchTrueMessage(){
   if (openCards.length === 2 && cardMatch === true ) {
     messageEl.textContent =  "Congrat's You've Got a Match!"
+    gameAudio.playIsPurring()
 }
 }
 
 function matchFalseMessage(){
   if (openCards.length === 2 && cardMatch === false ) {
     messageEl.textContent = 'Not a match, try again!'
+    gameAudio.playIsHissing()
 }
 }
 
@@ -259,16 +264,17 @@ function isWinnerTrue(){
     if (moves !== 0 && isTimeLeft !== false) {
     winner = true
     messageEl.textContent = 'Congrats You Won!'
+    gameAudio.playWinSound()
     confetti.start(1200)
     }
-  } else {
-    if (moves === 0) {
+  } else if (moves === 0) {
       messageEl.textContent = `You're out of moves, better luck next time!`
-    // } else if (isTimeLeft === false) {
-    //   messageEl.textContent = 'You ran out of time, better luck next time!'
-    }
+  // } else if (isTimeLeft === false) {
+  //   messageEl.textContent = 'You ran out of time, better luck next time!'
+  //   gameAudio.playTimerSound()
   }
-}
+  }
+
 
 // add light mode dark mode
 // Write and export a function to access picture data

@@ -282,6 +282,7 @@ function isWinnerTrue(){
           winner = true 
         } if (winner === true) {
           messageEl.textContent = 'Congrats You Won!'
+          confetti.start(1200)
         }
         }
     } else {

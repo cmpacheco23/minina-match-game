@@ -19,7 +19,11 @@ const mininaCards = [
 
 
 let cards = []
-let winner, countdown, moves, cardMatch, cardsToPlayGameWith, matchesMade, firstChoice, isTimeLeft, matchesComplete 
+let winner, moves, cardsToPlayGameWith,firstChoice
+
+let matchesComplete, matchesMade, cardMatch, expectedMatches
+
+let isTimeLeft, timeLeft 
 
 let openCards = []
 let cardToRemove = []
@@ -36,7 +40,7 @@ let completedMatches = []
   const cardEls = document.querySelectorAll('#minina-card')
   const cardContainer = document.querySelector('.card-container')
   const messageEl = document.getElementById('new-message')
-  const timeLeft = document.getElementById('timer')
+  const timeRemaining = document.getElementById('timer')
   const movesLeft = document.getElementById('moves')
   const matchesObtained = document.getElementById('match')
 
@@ -73,13 +77,28 @@ function initEasy() {
   matchesMade = 0 
   cardMatch = false
   winner = false
-  moves = 32 
+  movesLeft.textContent = `${moves = 16}`
   firstChoice = true
   matchesComplete = false
+  timeLeft = 15
+  expectedMatches = 8
   render()
+  isTimeLeft = true
   
 }
-  
+
+//setInterval(func, delay, arg1, arg2, /* …, */ argN)
+
+let timer = setInterval(function() {
+  timeRemaining.textContent = timeLeft + ' seconds'
+  timeLeft -= 1
+  if (timeLeft < 0) {
+    // isTimeLeft = false
+    //call the
+    timeRemaining.textContent = `Time's Up`
+    messageEl.textContent = 'You ran out of time, better luck next time!'
+  }
+}, 1000)
 
 function generateDeck() {
   let cardsOut = []
@@ -148,11 +167,11 @@ function flipCard(evt) {
       dom:cardFront, url:cardUrl
     }
   
-  // console.log(fullCardInfo)
-  openCards.push(fullCardInfo)
-   // console.log(openCards)      
+  openCards.push(fullCardInfo)   
   firstChoice = false
-
+  // isTimeLeft is registering as true instead of false
+  console.log(isTimeLeft)
+  isWinnerTrue()
   checkforMatch()
 }
 
@@ -162,7 +181,6 @@ function checkforMatch() {
 } else if (openCards.length === 2) {
   openCards[0].url === openCards[1].url ? cardMatch = true : cardMatch = false
   matchTrueMessage()
-  winMessage()
 // console.log(cardMatch)
 
   if (cardMatch) {
@@ -170,9 +188,9 @@ function checkforMatch() {
     matchesMade += 1
     matchesObtained.textContent = matchesMade
     completedMatches = openCards.slice(0,2) // use slice to move matched cards from one array into another
-    openCards.splice(0,2) // use splice to remove all matched cards 
-    //console.log(completedMatches)
-    // console.log(openCards)
+    openCards.splice(0,2) 
+    checkMatchesMade()
+    console.log(matchesComplete)
   } else {
     moves -= 1
     matchFalseMessage()
@@ -188,16 +206,10 @@ function checkforMatch() {
     // console.log(openCards)
   }
   console.log(`matches made ${matchesMade} and moves left ${moves}` )
+  console.log(isTimeLeft)
   }
   
-}
-
-
-// if cards are a match - I need to move those two cards into another array called completedMatches
-//console.log(openCards)
-
-//console.log(openCards)
-  
+} 
 
 function matchTrueMessage(){
   if (openCards.length === 2 && cardMatch === true ) {
@@ -226,91 +238,37 @@ function noCardsSelecMessage(){
   }
 }
 
-// function winMessage(){
-//   console.log(winner)
-//   if (winner === true) {
-//     messageEl.textContent = 'Congrats You Won!'
-//     console.log(winner)
-//     console.log(winMessage)
-// }
-// }
-
-// function updateMessage(){
-
-//   // console.log(openCards)
-//   // console.log(openCards.length)
-//   // console.log(firstChoice)
-//   if (openCards.length === 0 && firstChoice === false) {
-//     messageEl.textContent = 'Select Your Next Card'
-//     console.log(openCards)
-//   }else if (openCards.length === 1) {
-//     messageEl.textContent = 'Select Your Next Card'
-//   }
-  
-  // if (openCards.length === 1){
-  //   messageEl.textContent = 'Select Your Next Card'
-  //   console.log(openCards)
-  //   //Object.keys(openCards).length
-  //   // not displaying
-  //   // why is my h2 not changing when there is one card in the object openCards
-
-
-  // } else if (openCards.length === 2) {
-  //   if (cardMatch === true) {
-  //     messageEl.textContent = "Congrats You've got a match!"
-  //   } else if(cardMatch === false) {
-  //     messageEl.textContent = "Nice try, not a match - try again!!"
-  //   }
-  // }
-  
-  // if open cards has only 1 card message changes to make your next selection
-      // messageEl.textContent = `Make your next selection!`
-    
-  // if opencards has 2 items and cardMatch is false   change message to say 'oh no, you just missed it, try again, you lost a move!'
-  
-  // if open cards has 2 items but cardMatch is true change message to say woohoo you got a match!
-  
-  // messageEl.textContent = `It's ${cardMatch === true ? 'Nice work, you got a match!':'oh no, you just missed it, try again!'}`
-
-
-
-function isWinnerTrue(){
-  if (initEasy) {
-    if (moves !== 0 || isTimeLeft !== false) {
-      if (completedMatches === 16 || matchesMade === 8){
-          matchesComplete = true
-          winner = true 
-        } if (winner === true) {
-          messageEl.textContent = 'Congrats You Won!'
-          confetti.start(1200)
-        }
-        }
-    } else {
-      isWinnerFalse()
-    }
+function checkMatchesMade(){
+  if (matchesMade === expectedMatches) {
+    matchesComplete = true
+    isWinnerTrue()
+  } else {
+    return
   }
-  
-
-
-function isWinnerFalse(){
-  if (initEasy) {
-    if (matchesMade !== 8 || completedMatches !== 16) {
-      if (moves === 0 ) {
-        winner = false
-      } else if (isTimeLeft === false) {
-        winner = false 
-      } else {
-        return
-      }
-    }
-  }
-  //add next level here
+  // invoke in check for match function
 }
 
+function isThereTimeLeft(){
+  if(timeLeft < 0)
+  isTimeLeft = false
+}
+      
+function isWinnerTrue(){
 
-
-// function timerCountdown(){
-// }
+  if (matchesComplete === true) {
+    if (moves !== 0 && isTimeLeft !== false) {
+    winner = true
+    messageEl.textContent = 'Congrats You Won!'
+    confetti.start(1200)
+    }
+  } else {
+    if (moves === 0) {
+      messageEl.textContent = `You're out of moves, better luck next time!`
+    // } else if (isTimeLeft === false) {
+    //   messageEl.textContent = 'You ran out of time, better luck next time!'
+    }
+  }
+}
 
 // add light mode dark mode
 // Write and export a function to access picture data

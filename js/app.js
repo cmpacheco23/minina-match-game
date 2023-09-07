@@ -68,6 +68,7 @@ resetBtnEl.addEventListener('click', initEasy)
   // set cardMatch to false
   // call render function at the end of each init function
 
+  // start game function that holds an init function that shows all the buttons
   initEasy()
   // initMedium()
   // initHard()
@@ -78,29 +79,29 @@ function initEasy() {
   // timerCountdown =
   matchesMade = 0 
   cardMatch = false
-  winner = false
-  movesLeft.textContent = `${moves = 16}`
+  winner = undefined
+  movesLeft.textContent = `${moves = 4}`
   firstChoice = true
   matchesComplete = false
-  timeLeft = 200
+  timeLeft = 20
   expectedMatches = 8
   render()
   isTimeLeft = true
   
 }
 
-//setInterval(func, delay, arg1, arg2, /* …, */ argN)
 
 let timer = setInterval(function() {
   timeRemaining.textContent = timeLeft + ' seconds'
   timeLeft -= 1
-  if (timeLeft < 0) {
-    // isTimeLeft = false
-    //call the
-    timeRemaining.textContent = `Time's Up`
-    messageEl.textContent = 'You ran out of time, better luck next time!'
-    gameAudio.playTimerSound()
-  }
+  if ((timeLeft < 0 || isTimeLeft === false) && (winner === true)) {
+    timeRemaining.textContent = '🐾'
+  } else if ((timeLeft > 0 || isTimeLeft === true) && (moves === 0)) {
+    timeRemaining.textContent = '0'
+  } else if (timeLeft < 0 || isTimeLeft === false) {
+      timeRemaining.textContent = "Time's Up"
+      messageEl.textContent = 'You ran out of time, better luck next time!'
+      gameAudio.playTimerSound()}
 }, 1000)
 
 function generateDeck() {
@@ -136,8 +137,17 @@ function cardsDisplayDesign(){
     })
 }
 
-function shuffleCards(){
+function shuffleMininaArray(){
   return cardsToPlayGameWith[Math.floor(Math.random() * cardsToPlayGameWith.length)]
+}
+
+function shufflePlayingCards(){
+for (let i = mininaCards.length - 1; i > 0; i--) {
+  let j = Math.floor(Math.random() * i);
+  let temp = deck[i];
+  deck[i] = deck[j];
+  deck[j] = temp;
+}
 }
 
 // function shuffleCards(){
@@ -208,10 +218,11 @@ function checkforMatch() {
       openCards[1].dom.style.transform = 'rotateY(-180deg)'
       openCards[1].dom.style.backgroundImage =`url(${"../images/backs/minina.svg"})`
       openCards.splice(1,1)
-    },4000) 
+    },3000) 
     
     // console.log(openCards)
   }
+  isThereMovesLeft()
   console.log(`matches made ${matchesMade} and moves left ${moves}` )
   console.log(isTimeLeft)
   }
@@ -261,24 +272,47 @@ function isThereTimeLeft(){
   if(timeLeft < 0)
   isTimeLeft = false
 }
-      
+
+function isThereMovesLeft(){
+messageEl.textContent = moves === 0 ? `You're out of moves, better luck next time!` : messageEl.textContent;
+}      
+
 function isWinnerTrue(){
 
   if (matchesComplete === true) {
     if (moves !== 0 && isTimeLeft !== false) {
     winner = true
     messageEl.textContent = 'Congrats You Won!'
+    isTimeLeft = false
     gameAudio.playWinSound()
     confetti.start(1200)
+    gameOver()
+    // call a game is over function
     }
-  } else if (moves === 0) {
-      messageEl.textContent = `You're out of moves, better luck next time!`
-  // } else if (isTimeLeft === false) {
-  //   messageEl.textContent = 'You ran out of time, better luck next time!'
-  //   gameAudio.playTimerSound()
+  } else {
+      isLooserTrue()
   }
   }
 
+  function isLooserTrue(){
+    console.log(moves)
+
+    if (moves === 0 || isTimeLeft === false) {
+      winner = false
+      gameOver()
+      }
+    }
+  
+
+function gameOver(){
+
+  `${winner === false || winner === true ? 
+    (timeRemaining.textContent = '🐾', movesLeft.textContent = '🐾', matchesObtained.textContent = '🐾') : (timeRemaining.textContent + movesLeft.textContent + matchesObtained.textContent)}`
+  
+  // messageEl.textContent = moves === 0 ? `You're out of moves, better luck next time!` : messageEl.textContent;
+
+}
+// create a game over function
 
 // add light mode dark mode
 // Write and export a function to access picture data

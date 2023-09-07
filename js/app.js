@@ -1,4 +1,4 @@
-console.log('minina check')
+
 
 // import { generateCards } from "../js/data.js"
 const mininaCards = [ 
@@ -89,15 +89,16 @@ function generateDeck() {
   })
   cardsToPlayGameWith = cardsOut
   // is there where i invoke the shuffle function?
-  console.log(cardsToPlayGameWith)
-  console.log(firstChoice)
+  //console.log(cardsToPlayGameWith)
 }
 
 function render() {
   generateDeck()
   cardsDisplayDesign()
+  setTimeout(function() {
+    messageEl.textContent = 'Select Your First Card'
+  },3000) 
   // updateBoard()
-  updateMessage()
   }
   
 function cardsDisplayDesign(){
@@ -117,10 +118,11 @@ function shuffleCards(){
 }
 
 function flipCard(evt) {
+  
   isTimeLeft = true
   //add a condition that starts timer or call timer here!
  //   console.log(evt.target.id)
-  console.log(firstChoice)
+  // console.log(firstChoice)
     const cardFront = document.getElementById(`${(evt.target.id)}`)
     
     //console.log(cardFront)
@@ -145,53 +147,48 @@ function flipCard(evt) {
       dom:cardFront, url:cardUrl
     }
   
-  console.log(fullCardInfo)
+  // console.log(fullCardInfo)
   openCards.push(fullCardInfo)
    // console.log(openCards)      
   firstChoice = false
+
   checkforMatch()
-    
 }
 
 function checkforMatch() {
-console.log(openCards)
-  if (openCards.length > 2) {
-    return 
+  if (openCards.length === 1) {
+    nextCardMessage()
 } else if (openCards.length === 2) {
   openCards[0].url === openCards[1].url ? cardMatch = true : cardMatch = false
-console.log(cardMatch)
+  matchTrueMessage()
+  winMessage()
+// console.log(cardMatch)
 
   if (cardMatch) {
+    console.log(cardMatch)
     matchesMade += 1
     matchesObtained.textContent = matchesMade
     completedMatches = openCards.slice(0,2) // use slice to move matched cards from one array into another
     openCards.splice(0,2) // use splice to remove all matched cards 
-    console.log(completedMatches)
-    console.log(openCards)
+    //console.log(completedMatches)
+    // console.log(openCards)
   } else {
     moves -= 1
+    matchFalseMessage()
     // might need to parseInt this
     movesLeft.textContent = moves
-    console.log(openCards)
-    
+    // console.log(openCards)
     setTimeout(function() {
       openCards[1].dom.style.transform = 'rotateY(-180deg)'
       openCards[1].dom.style.backgroundImage =`url(${"../images/backs/minina.svg"})`
       openCards.splice(1,1)
     },4000) 
     
-    console.log(openCards)
-  
-    // cardToRemove.push(openCards[1])
-    //remove the background here instead of pushing the cards
-    //openCards.pop()
-    
-    // console.log(cardToRemove)
     // console.log(openCards)
   }
   console.log(`matches made ${matchesMade} and moves left ${moves}` )
   }
-  // unmatchedCardFlip()
+  
 }
 
 
@@ -201,46 +198,53 @@ console.log(cardMatch)
 //console.log(openCards)
   
 
+function matchTrueMessage(){
+  if (openCards.length === 2 && cardMatch === true ) {
+    messageEl.textContent =  "Congrat's You've Got a Match!"
+}
+}
 
-  // create a function checkCard 
-    // will check `if` opened card is a match
-    // if open card isnt a match it will flip the card over and remove a move
-console.log(cardToRemove)
-    
-// function unmatchedCardFlip() {
-//       //goals of this function
-//       // houses cardsToRemove
-//       //// step 1: set a delay through function setTimeOut
-//       //// step 2: turn card back around 'transform dom element'
-//       //// step 3: change background to back of card
-//         // questions - do I need to remove the current background first?
-//       // step 4: remove the class of the one card in cardToRemove so it doesn't cause issues with future cards - do I need to do this? bc it doesn't cause issues with future cards?
-//       // step 5: empty out the cardsToRemove array
-//       //issue appears when I add code after this function
-//       //function must live inside function to work
-//   setTimeout(function() {
-//     cardToRemove[0].dom.style.transform = 'rotateY(-180deg)'
-//     cardToRemove[0].dom.style.backgroundImage = `url(${"../images/backs/minina.svg"})`
-//     },4000) 
-  
-//     // console.log(cardToRemove)
-// }
+function matchFalseMessage(){
+  if (openCards.length === 2 && cardMatch === false ) {
+    messageEl.textContent = 'Not a match, try again!'
+}
+}
 
-
-function updateMessage(){
-  if (firstChoice === true && openCards.length === 0) {
-     // should render intial state h2 message from html
-     // can i add a time out function?
-      setTimeout(function() {
-        messageEl.textContent = 'Select Your First Card'
-      },3000) 
-      console.log(openCards)
-  } else if (firstChoice === false && openCards.length === 1) {
+function nextCardMessage(){
+if (openCards.length === 1) {
     messageEl.textContent = 'Select Your Next Card'
+}
+}
+
+function noCardsSelecMessage(){
+
+//isnt working, overrides the congrats function message
+  if (cardMatch === true && openCards.length === 0 && firstChoice === false) {
+    messageEl.textContent = 'Select Your Next Card'
+    console.log(openCards)
   }
-  {
-  
-  }
+}
+
+function winMessage(){
+  console.log(winner)
+  if (winner === true) {
+    messageEl.textContent = 'Congrats You Won!'
+    console.log(winner)
+    console.log(winMessage)
+}
+}
+
+// function updateMessage(){
+
+//   // console.log(openCards)
+//   // console.log(openCards.length)
+//   // console.log(firstChoice)
+//   if (openCards.length === 0 && firstChoice === false) {
+//     messageEl.textContent = 'Select Your Next Card'
+//     console.log(openCards)
+//   }else if (openCards.length === 1) {
+//     messageEl.textContent = 'Select Your Next Card'
+//   }
   
   // if (openCards.length === 1){
   //   messageEl.textContent = 'Select Your Next Card'
@@ -267,12 +271,13 @@ function updateMessage(){
   
   // messageEl.textContent = `It's ${cardMatch === true ? 'Nice work, you got a match!':'oh no, you just missed it, try again!'}`
 
-  }
+
 
 function isWinner(){
   if (initEasy) {
-    if (matchesMade === 32 && moves !== 0 && isTimeLeft === true) // also add isTimeLeft{
+    if (matchesMade === 8 && moves !== 0 && completedMatches === 8) // also add isTimeLeft{ //  === true
       winner = true
+      winMessage()
     } else if(matchesMade !== 32) {
       if (moves === 0) {
         winner = false

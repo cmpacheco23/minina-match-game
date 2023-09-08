@@ -66,6 +66,7 @@ let currentLevel
 
   /*----------------------------- Event Listeners -----------------------------*/
 
+document.addEventListener("DOMContentLoaded", initEasy)
 
 easyGame.addEventListener('click', () => {
   currentLevel = 'easy'
@@ -91,6 +92,8 @@ resetBtnEl.addEventListener('click', () => {
     initHard()
   }
 })
+
+
 /*-------------------------------- Functions --------------------------------*/
 
   initEasy()

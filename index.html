@@ -10,6 +10,9 @@
   <script src="./js/data.js" type="module"></script>
   <script src="./js/audio.js" type="module"></script>
   <script defer src="./js/confetti.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
   <link 
   id="favicon"
   rel="icon" 
@@ -21,21 +24,23 @@
   <h1> Minina's Matchup Adventure </h1>
   
   <section>
-    <h2 id="game-level" >Select a game level</h2>
+    <!-- <h2 id="game-level" >Select a game level</h2> -->
     <button class="difficulty" id="easy-game">Beginner</button>
     <button class="difficulty" id="medium-game">Intermediate</button>
     <button class="difficulty" id="hard-game">Advanced</button>
+    <button class="difficulty" id="reset-game"> Reset</button>
   </section>
+  <h2 id="new-message" >Start a new game!</h2>
   <div class="game-header-updates">
     <h4 id="matches-header" >Matches Made:</h4>
     <p id="match">0</p>
     <h4 id="timer-header" >Time Left:</h4>
-    <p id="timer">0:0</p>
+    <p id="timer">0</p>
     <h4 id="moves-header">Moves Left:</h4>
     <p id="moves"></p>
   </div>
-  <h2 id="new-message" >Start a new game!</h2>
-  <button id="reset-game"> Reset</button>
+
+
   <div id="minina-card" class="card-container">
   <!-- <div class="card back-minina large shadow outline"></div> -->
 

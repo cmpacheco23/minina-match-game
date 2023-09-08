@@ -67,6 +67,7 @@ let cardCount
   const movesLeft = document.getElementById('moves')
   const matchesObtained = document.getElementById('match')
   const favicon = document.getElementById('favicon')
+  const bodyElement = document.querySelector('body')
 
   /*----------------------------- Event Listeners -----------------------------*/
 
@@ -97,7 +98,8 @@ function initEasy() {
   cardCount = 6
   render()
   isTimeLeft = true
-  
+  bodyElement.style.backgroundColor = '#48233C'
+
 }
 
 function initMedium() {
@@ -113,6 +115,7 @@ function initMedium() {
   cardCount = 18
   render()
   isTimeLeft = true
+  bodyElement.style.backgroundColor = '#370031'
 }
 
 function initHard() {
@@ -128,6 +131,7 @@ function initHard() {
   cardCount = 30
   render()
   isTimeLeft = true
+  bodyElement.style.backgroundColor = '#0B0033'
 }
 
 function generateDeck() {

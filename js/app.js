@@ -43,22 +43,13 @@ const mininaCards = [
 /*---------------------------- Variables (state) ----------------------------*/
 
 
-let cards = []
 let winner, moves, cardsToPlayGameWith,firstChoice
-
 let matchesComplete, matchesMade, cardMatch, expectedMatches
-
 let gameOver = false
 let isTimeLeft, timeLeft, timer 
-
 let openCards = []
-let cardToRemove = []
 let completedMatches = []
-
 let cardCount
-
-let isDisabled = false
-
 
 
 // set difficulty to a number and assign it to a constant for each level
@@ -102,8 +93,8 @@ function initEasy() {
   firstChoice = true
   matchesComplete = false
   timeLeft = 10
-  expectedMatches = 8
-  cardCount = 8
+  expectedMatches = 6
+  cardCount = 6
   render()
   isTimeLeft = true
   
@@ -129,28 +120,25 @@ function initHard() {
   matchesMade = 0 
   cardMatch = false
   winner = undefined
-  movesLeft.textContent = `${moves = 40}`
+  movesLeft.textContent = `${moves = 150}`
   firstChoice = true
   matchesComplete = false
   timeLeft = 20
-  expectedMatches = 36
-  cardCount = 32
+  expectedMatches = 30
+  cardCount = 30
   render()
   isTimeLeft = true
 }
 
 function generateDeck() {
   let cardsOut = []
-  // fisherYatesShuffle(mininaCards)
-
   mininaCards.slice(0,cardCount).forEach((card) => {
     cardsOut.push(card)
     cardsOut.push(card)
   })
   cardsToPlayGameWith = cardsOut
-  // fisherYatesShuffle(cardsToPlayGameWith)
+  fisherYatesShuffle(cardsToPlayGameWith)
 
-  //console.log(cardsToPlayGameWith)
 }
 
 function render() {
@@ -162,7 +150,6 @@ function render() {
   }
   
 function cardsDisplayDesign(){
- // console.log('cardsdisplay')
   cardContainer.innerHTML = ''
   cardsToPlayGameWith.forEach((card, idx) => {
       const newCard = document.createElement('div')
@@ -173,15 +160,10 @@ function cardsDisplayDesign(){
     })
 }
 
-console.log(cardContainer)
-console.log(cardContainer.children)
-
-
-
 function fisherYatesShuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]]; // Swap elements at i and j
+    [array[i], array[j]] = [array[j], array[i]]; 
   }
 }
 
@@ -216,9 +198,6 @@ function flipCard(evt) {
           gameAudio.playTimerSound()}
     }, 1000)}
     
-
-    
-
   firstChoice = false
   console.log(isTimeLeft)
   isWinnerTrue()
@@ -301,7 +280,6 @@ function checkMatchesMade(){
   } else {
     return
   }
-  // invoke in check for match function
 }
 
 function isThereTimeLeft(){
@@ -345,7 +323,6 @@ function gameOverMessage(){
     (timeRemaining.textContent = '🐾', movesLeft.textContent = '🐾', matchesObtained.textContent = '🐾') : (timeRemaining.textContent + movesLeft.textContent + matchesObtained.textContent)}`
 
 }
-
 
 function endPlay() {
   if (gameOver) {

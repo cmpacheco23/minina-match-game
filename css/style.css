@@ -6,7 +6,7 @@ body {
   background-color: rgb(236, 205, 216);
 }
 
-.card-container {
+/* .card-container {
   display: grid;
   justify-content: center;
   grid-gap: 2px;
@@ -16,8 +16,20 @@ body {
   margin-bottom: 0px;
   justify-content: space-evenly;
   
-}
+} */
 
+.card-container {
+  display: grid;
+  justify-content: center;
+  grid-gap: 2px;
+  grid-template-columns: repeat(6, 120px);
+  grid-template-rows: repeat(0, calc(80px / 2*4));
+  /* flex-grow: 4; */
+  margin-top: 0px;
+  margin-bottom: 0px;
+  justify-content: space-evenly;
+  
+}
 
 /* .card-container {
   display: grid;
@@ -130,4 +142,5 @@ p {
 h2#new-message {
 /* houses message text */
 font-size: 26px;
+
 }

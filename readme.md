@@ -43,7 +43,7 @@ Keep making matches to earn more points.
 
 3. Level 3: Advanced
 
-    Generate 32 matches (64 cards total) within 4 minutes, and use no more than 42 moves.
+    Generate 30 matches (60 cards total) within 4 minutes, and use no more than 42 moves.
 
 ***
 ### Credits   /  Attributions: 🙌

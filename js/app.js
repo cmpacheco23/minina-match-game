@@ -213,12 +213,12 @@ function flipCard(evt) {
   const cardUrl = cardsToPlayGameWith[idMod].image
   cardFront.style.backgroundImage = `url(${cardUrl})`
 
-  console.log(cardUrl)
   const fullCardInfo = {
     dom:cardFront, url:cardUrl
   }
   
   openCards.push(fullCardInfo)   
+  console.log(firstChoice)
   if (firstChoice === true){
     timer = setInterval(function() {
       timeRemaining.textContent = timeLeft + ' seconds'

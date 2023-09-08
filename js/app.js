@@ -81,18 +81,21 @@ let currentLevel
 
 easyGame.addEventListener('click', () => {
   currentLevel = 'easy'
-  initEasy(); 
-});
+  initEasy()
+
+})
 
 mediumGame.addEventListener('click', () => {
   currentLevel = 'medium'
-  initMedium(); 
-});
+  initMedium()
+
+})
 
 hardGame.addEventListener('click', () => {
   currentLevel = 'hard'
   initHard()
-});
+
+})
 
 
 resetBtnEl.addEventListener('click', () => {
@@ -103,7 +106,7 @@ resetBtnEl.addEventListener('click', () => {
   } else if (currentLevel === 'hard') {
     initHard()
   }
-});
+})
 /*-------------------------------- Functions --------------------------------*/
 
   initEasy()

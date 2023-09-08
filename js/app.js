@@ -48,6 +48,7 @@ let winner, moves, cardsToPlayGameWith,firstChoice
 
 let matchesComplete, matchesMade, cardMatch, expectedMatches
 
+let gameOver = false
 let isTimeLeft, timeLeft, timer 
 
 let openCards = []
@@ -56,6 +57,7 @@ let completedMatches = []
 
 let cardCount
 
+let isDisabled = false
 
 
 
@@ -80,29 +82,26 @@ let cardCount
 
 easyGame.addEventListener('click', initEasy)
 
-// mediumGame.addEventListener('click', initMedium)
-// hardGame.addEventListener('click', initHard)
-// timerCountdown.addEventListener('',)
-
+mediumGame.addEventListener('click', initMedium)
+hardGame.addEventListener('click', initHard)
 resetBtnEl.addEventListener('click', initEasy)
 
 /*-------------------------------- Functions --------------------------------*/
 
   initEasy()
-  //initMedium()
-  // initHard()
+  initMedium()
+  initHard()
 
 function initEasy() {
-    
-    
-  // timerCountdown =
+
   matchesMade = 0 
   cardMatch = false
   winner = undefined
-  movesLeft.textContent = `${moves = 32}`
+  movesLeft.textContent = `${moves = 1}`
+  //use 4 moves when testing
   firstChoice = true
   matchesComplete = false
-  timeLeft = 400
+  timeLeft = 10
   expectedMatches = 8
   cardCount = 8
   render()
@@ -121,6 +120,21 @@ function initMedium() {
   timeLeft = 20
   expectedMatches = 36
   cardCount = 18
+  render()
+  isTimeLeft = true
+}
+
+function initHard() {
+
+  matchesMade = 0 
+  cardMatch = false
+  winner = undefined
+  movesLeft.textContent = `${moves = 40}`
+  firstChoice = true
+  matchesComplete = false
+  timeLeft = 20
+  expectedMatches = 36
+  cardCount = 32
   render()
   isTimeLeft = true
 }
@@ -145,7 +159,6 @@ function render() {
   setTimeout(function() {
     messageEl.textContent = 'Select Your First Card'
   },3000) 
-  // updateBoard()
   }
   
 function cardsDisplayDesign(){
@@ -155,10 +168,13 @@ function cardsDisplayDesign(){
       const newCard = document.createElement('div')
       newCard.className = `card back-minina large shadow outline`
       newCard.id = `minina-card-${idx}`
-      newCard.addEventListener('click', flipCard)
+      newCard.addEventListener('click', flipCard) 
       cardContainer.appendChild(newCard)
     })
 }
+
+console.log(cardContainer)
+console.log(cardContainer.children)
 
 
 
@@ -170,6 +186,7 @@ function fisherYatesShuffle(array) {
 }
 
 function flipCard(evt) {
+  endPlay()
   isTimeLeft = true
   const cardFront = document.getElementById(`${(evt.target.id)}`)
   cardFront.classList.remove(`back-minina`)
@@ -305,8 +322,7 @@ function isWinnerTrue(){
     isTimeLeft = false
     gameAudio.playWinSound()
     confetti.start(1200)
-    gameOver()
-    // call a game is over function
+    gameOverMessage()
     }
   } else {
       isLooserTrue()
@@ -318,32 +334,29 @@ function isWinnerTrue(){
 
     if (moves === 0 || isTimeLeft === false) {
       winner = false
-      gameOver()
+      gameOverMessage()
       }
     }
   
 
-function gameOver(){
+function gameOverMessage(){
 
   `${winner === false || winner === true ? 
     (timeRemaining.textContent = '🐾', movesLeft.textContent = '🐾', matchesObtained.textContent = '🐾') : (timeRemaining.textContent + movesLeft.textContent + matchesObtained.textContent)}`
-  
-  // messageEl.textContent = moves === 0 ? `You're out of moves, better luck next time!` : messageEl.textContent;
 
 }
-// create a game over function
 
-// add light mode dark mode
-// Write and export a function to access picture data
-// Import the function that will allow us access to the picture data (this lives under constants)
-// Test the function to make sure its working
-// Tweak event listener so that picture data is stored in a variable
-// Create a card so each image will have a card assocaited with it
-// Go back and add sound effects when: 
-  // game starts
-  // card is flipped
-  // timer runs out (player loses)
-  // player is out moves (player loses)
-  // player wins
-// Go back and add confetti when a player wins a level
-// Also find a way to add fun animations that go along with the cat theme
+
+function endPlay() {
+  if (gameOver) {
+    return
+  }
+  isGameOver()
+}
+
+function isGameOver() {
+
+  if (winner === true || moves === 0 || isTimeLeft === false) {
+    gameOver = true
+  }
+}

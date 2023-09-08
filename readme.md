@@ -33,17 +33,17 @@ Keep making matches to earn more points.
 
 1. Level 1: Beginner
 
-     Generate 8 matches (16 cards total) within 10 minutes, and use no more than 32 moves.
+     Generate 6 matches (12 cards total) within 80 seconds, and use no more than 20 moves.
 
 
 2. Level 2: Intermediate
 
-    Generate 18 matches (36 cards total) within 6 minutes, and use no more than 62 moves.
+    Generate 12 matches (24 cards total) within 180 seconds, and use no more than 60 moves.
 
 
 3. Level 3: Advanced
 
-    Generate 30 matches (60 cards total) within 4 minutes, and use no more than 42 moves.
+    Generate 21 matches (42 cards total) within 300 seconds, and use no more than 150 moves.
 
 ***
 ### Credits   /  Attributions: 🙌

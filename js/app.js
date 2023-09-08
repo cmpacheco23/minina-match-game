@@ -119,6 +119,7 @@ function initEasy() {
   firstChoice = true
   matchesComplete = false
   timeLeft = 80
+  timeRemaining.textContent = `${timeLeft = 80} seconds`
   expectedMatches = 6
   cardCount = 6
   currentLevel = 'easy'
@@ -137,8 +138,9 @@ function initMedium() {
   firstChoice = true
   matchesComplete = false
   timeLeft = 180
-  expectedMatches = 36
-  cardCount = 18
+  timeRemaining.textContent = `${timeLeft = 180} seconds`
+  expectedMatches = 12
+  cardCount = 12
   currentLevel = 'medium'
   render()
   isTimeLeft = true
@@ -154,8 +156,9 @@ function initHard() {
   firstChoice = true
   matchesComplete = false
   timeLeft = 300
-  expectedMatches = 30
-  cardCount = 30
+  timeRemaining.textContent = `${timeLeft = 300} seconds`
+  expectedMatches = 21
+  cardCount = 21
   currentLevel = 'hard'
   render()
   isTimeLeft = true

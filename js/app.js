@@ -169,7 +169,7 @@ function render() {
   generateDeck()
   cardsDisplayDesign()
   setTimeout(function() {
-    messageEl.textContent = `Pick Your First Card, Let's Get Catty`
+    messageEl.textContent = `Pick Your First Card, Let's Get Catty.`
   },1500) 
   }
   
@@ -258,7 +258,7 @@ function checkforMatch() {
 
 function matchTrueMessage(){
   if (openCards.length === 2 && cardMatch === true ) {
-    messageEl.textContent =  `Meow-grats, That's a Pawfect Match!`
+    messageEl.textContent =  `Meow-grats, Pawfect Match!`
     gameAudio.playIsPurring()
 }
 }
@@ -272,7 +272,7 @@ function matchFalseMessage(){
 
 function nextCardMessage(){
 if (openCards.length === 1) {
-    messageEl.textContent = `Pounce on Your Next Card, Hooman, Now`
+    messageEl.textContent = `Pounce on Your Next Card, Hooman, Now!`
 }
 }
 

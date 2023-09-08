@@ -89,12 +89,12 @@ button#hard-game{
   background-color: black;
 }
 
-
 #reset-game{
   background-color: rgb(0, 0, 0);
   width: 90px;
   text-align: center;
   justify-content: space-evenly;
+  border: 1px solid rgba(77, 73, 77, 0.532);
 }
 
 #reset-game:hover{

@@ -48,6 +48,7 @@ let openCards = []
 let completedMatches = []
 let cardCount
 let currentLevel
+let newCardTemp
 
 /*------------------------ Cached Element References ------------------------*/
 

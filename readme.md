@@ -64,7 +64,7 @@ Keep making matches to earn more points.
 * HTML
 * CSS
 ***
-### Next Steps:
+### Icebox: 🧊
 We're not done yet! Here are some planned enhancements for "Minina's Matchup Adventure":
 
 * Assign each level their own theme - css updates to come!

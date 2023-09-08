@@ -1,7 +1,5 @@
-
 import * as gameAudio from './audio.js'
 
-// import { generateCards } from "../js/data.js"
 const mininaCards = [ 
   {image: "../images/fronts/minina1.svg"},
   {image: "../images/fronts/minina2.svg"},
@@ -12,7 +10,7 @@ const mininaCards = [
   {image: "../images/fronts/minina7.svg"},
   {image: "../images/fronts/minina8.svg"},
   {image: "../images/fronts/minina9.svg"},
-  {image: "../images/fronts/minina10.svg"},
+  // {image: "../images/fronts/minina10.svg"},
   {image: "../images/fronts/minina11.svg"},
   {image: "../images/fronts/minina12.svg"},
   {image: "../images/fronts/minina13.svg"},
@@ -42,7 +40,6 @@ const mininaCards = [
 
 /*---------------------------- Variables (state) ----------------------------*/
 
-
 let winner, moves, cardsToPlayGameWith,firstChoice
 let matchesComplete, matchesMade, cardMatch, expectedMatches
 let gameOver = false
@@ -51,9 +48,6 @@ let openCards = []
 let completedMatches = []
 let cardCount
 let currentLevel
-
-
-// set difficulty to a number and assign it to a constant for each level
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -73,30 +67,20 @@ let currentLevel
   /*----------------------------- Event Listeners -----------------------------*/
 
 
-// easyGame.addEventListener('click', initEasy)
-
-// mediumGame.addEventListener('click', initMedium)
-// hardGame.addEventListener('click', initHard)
-// resetBtnEl.addEventListener('click', initEasy)
-
 easyGame.addEventListener('click', () => {
   currentLevel = 'easy'
   initEasy()
-
 })
 
 mediumGame.addEventListener('click', () => {
   currentLevel = 'medium'
   initMedium()
-
 })
 
 hardGame.addEventListener('click', () => {
   currentLevel = 'hard'
   initHard()
-
 })
-
 
 resetBtnEl.addEventListener('click', () => {
   if (currentLevel === 'easy') {
@@ -133,7 +117,6 @@ function initEasy() {
 }
 
 function initMedium() {
-
   matchesMade = 0 
   cardMatch = false
   winner = undefined
@@ -151,7 +134,6 @@ function initMedium() {
 }
 
 function initHard() {
-
   matchesMade = 0 
   cardMatch = false
   winner = undefined
@@ -184,7 +166,7 @@ function render() {
   cardsDisplayDesign()
   setTimeout(function() {
     messageEl.textContent = 'Select Your First Card'
-  },3000) 
+  },1500) 
   }
   
 function cardsDisplayDesign(){
@@ -219,9 +201,8 @@ function flipCard(evt) {
   const fullCardInfo = {
     dom:cardFront, url:cardUrl
   }
-  
+
   openCards.push(fullCardInfo)   
-  console.log(firstChoice)
   if (firstChoice === true){
     timer = setInterval(function() {
       timeRemaining.textContent = timeLeft + ' seconds'
@@ -237,10 +218,8 @@ function flipCard(evt) {
     }, 1000)}
     
   firstChoice = false
-  console.log(isTimeLeft)
   isWinnerTrue()
   checkforMatch()
-  console.log(cardMatch)
 }
 
 
@@ -249,19 +228,14 @@ function checkforMatch() {
     nextCardMessage()
 } else if (openCards.length === 2) {
   openCards[0].url === openCards[1].url ? cardMatch = true : cardMatch = false
-  console.log(cardMatch)
-
 
   if (cardMatch) {
-    console.log(cardMatch)
     matchesMade += 1
     matchesObtained.textContent = matchesMade
     matchTrueMessage()
     completedMatches = openCards.slice(0,2) 
     openCards.splice(0,2) 
     checkMatchesMade()
-    console.log(matchesComplete)
-    console.log(cardMatch)
   } else {
     moves -= 1
     matchFalseMessage()
@@ -271,18 +245,14 @@ function checkforMatch() {
       openCards[1].dom.style.transform = 'rotateY(-180deg)'
       openCards[1].dom.style.backgroundImage =`url(${"../images/backs/minina.svg"})`
       openCards.splice(1,1)
-    },3000) 
-    
-
+    },1000) 
+  }
   }
   isThereMovesLeft()
-  console.log(`matches made ${matchesMade} and moves left ${moves}` )
   }
-  
-} 
+
 
 function matchTrueMessage(){
-  console.log(cardMatch)
   if (openCards.length === 2 && cardMatch === true ) {
     messageEl.textContent =  "Congrat's You've Got a Match!"
     gameAudio.playIsPurring()
@@ -302,14 +272,6 @@ if (openCards.length === 1) {
 }
 }
 
-function noCardsSelecMessage(){
-
-//isnt working, overrides the congrats function message
-  if (cardMatch === true && openCards.length === 0 && firstChoice === false) {
-    messageEl.textContent = 'Select Your Next Card'
-    console.log(openCards)
-  }
-}
 
 function checkMatchesMade(){
   if (matchesMade === expectedMatches) {
@@ -346,7 +308,6 @@ function isWinnerTrue(){
   }
 
   function isLooserTrue(){
-    console.log(moves)
 
     if (moves === 0 || isTimeLeft === false) {
       winner = false

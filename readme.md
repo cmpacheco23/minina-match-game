@@ -58,6 +58,9 @@ Keep making matches to earn more points.
 * Sound Effect 3 - [Purr from Mafon2 on Free Sounds](https://freesound.org/people/Mafon2/sounds/436542/)
 * Sound Effect 4 - [Win Slot Machine from LittleRobotSoundFactory on Free Sounds](https://freesound.org/people/LittleRobotSoundFactory/sounds/274180/) 
 
+#### Animations:
+* Animation 1 - [Animate Jello by Animate.Style](https://animate.style/)
+
 ***
 ### Technologies Used 💾
 * JavaScript
@@ -65,9 +68,8 @@ Keep making matches to earn more points.
 * CSS
 ***
 ### Icebox: 🧊
-We're not done yet! Here are some planned enhancements for "Minina's Matchup Adventure":
-
 * Assign each level their own theme - css updates to come!
 * Add new levels with new challenges.
+* Add responsive design to accomodate mobile devices.
 
 Stay tuned for these exciting updates! 🐾😸🃏

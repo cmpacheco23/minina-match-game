@@ -169,7 +169,7 @@ function render() {
   generateDeck()
   cardsDisplayDesign()
   setTimeout(function() {
-    messageEl.textContent = 'Select Your First Card'
+    messageEl.textContent = `Pick Your First Card, Let's Get Catty`
   },1500) 
   }
   
@@ -217,7 +217,7 @@ function flipCard(evt) {
         timeRemaining.textContent = '0'
       } else if (timeLeft < 0 || isTimeLeft === false) {
           timeRemaining.textContent = "Time's Up"
-          messageEl.textContent = 'You ran out of time, better luck next time!'
+          messageEl.textContent = `Time's Up! Next Time, Purr-haps!`
           gameAudio.playTimerSound()}
     }, 1000)}
     
@@ -258,21 +258,21 @@ function checkforMatch() {
 
 function matchTrueMessage(){
   if (openCards.length === 2 && cardMatch === true ) {
-    messageEl.textContent =  "Congrat's You've Got a Match!"
+    messageEl.textContent =  `Meow-grats, That's a Pawfect Match!`
     gameAudio.playIsPurring()
 }
 }
 
 function matchFalseMessage(){
   if (openCards.length === 2 && cardMatch === false ) {
-    messageEl.textContent = 'Not a match, try again!'
+    messageEl.textContent = `No purr-fect match, hooman! Retry, meow!`
     gameAudio.playIsHissing()
 }
 }
 
 function nextCardMessage(){
 if (openCards.length === 1) {
-    messageEl.textContent = 'Select Your Next Card'
+    messageEl.textContent = `Pounce on Your Next Card, Hooman, Now`
 }
 }
 
@@ -292,7 +292,7 @@ function isThereTimeLeft(){
 }
 
 function isThereMovesLeft(){
-messageEl.textContent = moves === 0 ? `You're out of moves, better luck next time!` : messageEl.textContent;
+messageEl.textContent = moves === 0 ? `Meow-nomore-moves! Try again!"` : messageEl.textContent;
 }      
 
 function isWinnerTrue(){
@@ -300,7 +300,7 @@ function isWinnerTrue(){
   if (matchesComplete === true) {
     if (moves !== 0 && isTimeLeft !== false) {
     winner = true
-    messageEl.textContent = 'Congrats You Won!'
+    messageEl.textContent = `Pawsitively Purrfect! You're a Winner!`
     isTimeLeft = false
     gameAudio.playWinSound()
     confetti.start(1200)

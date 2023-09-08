@@ -1,7 +1,7 @@
 
 let isHissing = new Audio ('./sounds/hiss.wav')
 let isPurring = new Audio ('./sounds/purr.wav')
-let winSoundv2 = new Audio ('./sounds/win-song.wav')
+let winSound = new Audio ('./sounds/slot-win-short.wav')
 let timeOut = new Audio ('./sounds/alarm.wav')
 // out of moves
 
@@ -16,9 +16,9 @@ function playIsPurring () {
   isPurring.play()
 }
 
-function playWinSoundTwo () {
-  winSoundv2.volume = 0.25
-  winSoundv2.play()
+function playWinSound () {
+  winSound.volume = 0.25
+  winSound.play()
 }
 
 function playTimerSound () {
@@ -30,6 +30,5 @@ export{
   playIsHissing,
   playWinSound,
   playIsPurring,
-  playWinSoundTwo,
   playTimerSound
 }

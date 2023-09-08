@@ -10,7 +10,31 @@ const mininaCards = [
   {image: "../images/fronts/minina5.svg"},
   {image: "../images/fronts/minina6.svg"},
   {image: "../images/fronts/minina7.svg"},
-  {image: "../images/fronts/minina8.svg"}
+  {image: "../images/fronts/minina8.svg"},
+  {image: "../images/fronts/minina9.svg"},
+  {image: "../images/fronts/minina10.svg"},
+  {image: "../images/fronts/minina11.svg"},
+  {image: "../images/fronts/minina12.svg"},
+  {image: "../images/fronts/minina13.svg"},
+  {image: "../images/fronts/minina14.svg"},
+  {image: "../images/fronts/minina15.svg"},
+  {image: "../images/fronts/minina16.svg"},
+  {image: "../images/fronts/minina17.svg"},
+  {image: "../images/fronts/minina18.svg"},
+  {image: "../images/fronts/minina19.svg"},
+  {image: "../images/fronts/minina20.svg"},
+  {image: "../images/fronts/minina21.svg"},
+  {image: "../images/fronts/minina22.svg"},
+  {image: "../images/fronts/minina23.svg"},
+  {image: "../images/fronts/minina24.svg"},
+  {image: "../images/fronts/minina25.svg"},
+  {image: "../images/fronts/minina26.svg"},
+  {image: "../images/fronts/minina27.svg"},
+  {image: "../images/fronts/minina28.svg"},
+  {image: "../images/fronts/minina29.svg"},
+  {image: "../images/fronts/minina30.svg"},
+  {image: "../images/fronts/minina31.svg"},
+  {image: "../images/fronts/minina32.svg"}
   ]
   
 
@@ -24,11 +48,16 @@ let winner, moves, cardsToPlayGameWith,firstChoice
 
 let matchesComplete, matchesMade, cardMatch, expectedMatches
 
-let isTimeLeft, timeLeft 
+let isTimeLeft, timeLeft, timer 
 
 let openCards = []
 let cardToRemove = []
 let completedMatches = []
+
+let cardCount
+
+
+
 
 // set difficulty to a number and assign it to a constant for each level
 
@@ -59,18 +88,8 @@ resetBtnEl.addEventListener('click', initEasy)
 
 /*-------------------------------- Functions --------------------------------*/
 
-// Within each init level:
-// Create init function for each level of the game
-  // set board variable to an array containing the x (number will vary by level) to nulls to represent unflipped squares - ben sugests to do this as a number
-  // invoke / call shuffleCards function
-  // set winner to false
-  // set timer to moves to number of total moves allowed by level
-  // set cardMatch to false
-  // call render function at the end of each init function
-
-  // start game function that holds an init function that shows all the buttons
   initEasy()
-  // initMedium()
+  //initMedium()
   // initHard()
 
 function initEasy() {
@@ -80,39 +99,43 @@ function initEasy() {
   matchesMade = 0 
   cardMatch = false
   winner = undefined
-  movesLeft.textContent = `${moves = 4}`
+  movesLeft.textContent = `${moves = 32}`
   firstChoice = true
   matchesComplete = false
-  timeLeft = 20
+  timeLeft = 400
   expectedMatches = 8
+  cardCount = 8
   render()
   isTimeLeft = true
   
 }
 
+function initMedium() {
 
-let timer = setInterval(function() {
-  timeRemaining.textContent = timeLeft + ' seconds'
-  timeLeft -= 1
-  if ((timeLeft < 0 || isTimeLeft === false) && (winner === true)) {
-    timeRemaining.textContent = '🐾'
-  } else if ((timeLeft > 0 || isTimeLeft === true) && (moves === 0)) {
-    timeRemaining.textContent = '0'
-  } else if (timeLeft < 0 || isTimeLeft === false) {
-      timeRemaining.textContent = "Time's Up"
-      messageEl.textContent = 'You ran out of time, better luck next time!'
-      gameAudio.playTimerSound()}
-}, 1000)
+  matchesMade = 0 
+  cardMatch = false
+  winner = undefined
+  movesLeft.textContent = `${moves = 40}`
+  firstChoice = true
+  matchesComplete = false
+  timeLeft = 20
+  expectedMatches = 36
+  cardCount = 18
+  render()
+  isTimeLeft = true
+}
 
 function generateDeck() {
   let cardsOut = []
-    
-  mininaCards.forEach((card) => {
+  // fisherYatesShuffle(mininaCards)
+
+  mininaCards.slice(0,cardCount).forEach((card) => {
     cardsOut.push(card)
     cardsOut.push(card)
   })
   cardsToPlayGameWith = cardsOut
-  // is there where i invoke the shuffle function?
+  // fisherYatesShuffle(cardsToPlayGameWith)
+
   //console.log(cardsToPlayGameWith)
 }
 
@@ -137,99 +160,95 @@ function cardsDisplayDesign(){
     })
 }
 
-function shuffleMininaArray(){
-  return cardsToPlayGameWith[Math.floor(Math.random() * cardsToPlayGameWith.length)]
-}
 
-function shufflePlayingCards(){
-for (let i = mininaCards.length - 1; i > 0; i--) {
-  let j = Math.floor(Math.random() * i);
-  let temp = deck[i];
-  deck[i] = deck[j];
-  deck[j] = temp;
-}
-}
 
-// function shuffleCards(){
-//   return mininaCards[Math.floor(Math.random() * mininaCards.length)]
-// }
+function fisherYatesShuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]; // Swap elements at i and j
+  }
+}
 
 function flipCard(evt) {
-  
   isTimeLeft = true
-  //add a condition that starts timer or call timer here!
- //   console.log(evt.target.id)
-  // console.log(firstChoice)
-    const cardFront = document.getElementById(`${(evt.target.id)}`)
-    
-    //console.log(cardFront)
-    //console.log(cardFront)
-    cardFront.classList.remove(`back-minina`)
-    cardFront.style.transform = 'rotateY(180deg)'
-    
-    // console.log(cardsToPlayGameWith)
-    // console.log(evt.target.id)
-    
-    const id = parseInt(evt.target.id.split('-')[2])
-    
-    const idMod = id % cardsToPlayGameWith.length
-    
-    const cardUrl = cardsToPlayGameWith[idMod].image
-    cardFront.style.backgroundImage = `url(${cardUrl})`
-    
-    //console.log(cardFront)
-    
-    console.log(cardUrl)
-    const fullCardInfo = {
-      dom:cardFront, url:cardUrl
-    }
+  const cardFront = document.getElementById(`${(evt.target.id)}`)
+  cardFront.classList.remove(`back-minina`)
+  cardFront.style.transform = 'rotateY(180deg)'
+  const id = parseInt(evt.target.id.split('-')[2])
+  const idMod = id % cardsToPlayGameWith.length
+  const cardUrl = cardsToPlayGameWith[idMod].image
+  cardFront.style.backgroundImage = `url(${cardUrl})`
+
+  console.log(cardUrl)
+  const fullCardInfo = {
+    dom:cardFront, url:cardUrl
+  }
   
   openCards.push(fullCardInfo)   
+  if (firstChoice === true){
+    timer = setInterval(function() {
+      timeRemaining.textContent = timeLeft + ' seconds'
+      timeLeft -= 1
+      if ((timeLeft < 0 || isTimeLeft === false) && (winner === true)) {
+        timeRemaining.textContent = '🐾'
+      } else if ((timeLeft > 0 || isTimeLeft === true) && (moves === 0)) {
+        timeRemaining.textContent = '0'
+      } else if (timeLeft < 0 || isTimeLeft === false) {
+          timeRemaining.textContent = "Time's Up"
+          messageEl.textContent = 'You ran out of time, better luck next time!'
+          gameAudio.playTimerSound()}
+    }, 1000)}
+    
+
+    
+
   firstChoice = false
-  // isTimeLeft is registering as true instead of false
   console.log(isTimeLeft)
   isWinnerTrue()
   checkforMatch()
+  console.log(cardMatch)
 }
+
 
 function checkforMatch() {
   if (openCards.length === 1) {
     nextCardMessage()
 } else if (openCards.length === 2) {
   openCards[0].url === openCards[1].url ? cardMatch = true : cardMatch = false
-  matchTrueMessage()
-// console.log(cardMatch)
+  console.log(cardMatch)
+
 
   if (cardMatch) {
     console.log(cardMatch)
     matchesMade += 1
     matchesObtained.textContent = matchesMade
-    completedMatches = openCards.slice(0,2) // use slice to move matched cards from one array into another
+    matchTrueMessage()
+    completedMatches = openCards.slice(0,2) 
     openCards.splice(0,2) 
     checkMatchesMade()
     console.log(matchesComplete)
+    console.log(cardMatch)
   } else {
     moves -= 1
     matchFalseMessage()
-    // might need to parseInt this
+
     movesLeft.textContent = moves
-    // console.log(openCards)
     setTimeout(function() {
       openCards[1].dom.style.transform = 'rotateY(-180deg)'
       openCards[1].dom.style.backgroundImage =`url(${"../images/backs/minina.svg"})`
       openCards.splice(1,1)
     },3000) 
     
-    // console.log(openCards)
+
   }
   isThereMovesLeft()
   console.log(`matches made ${matchesMade} and moves left ${moves}` )
-  console.log(isTimeLeft)
   }
   
 } 
 
 function matchTrueMessage(){
+  console.log(cardMatch)
   if (openCards.length === 2 && cardMatch === true ) {
     messageEl.textContent =  "Congrat's You've Got a Match!"
     gameAudio.playIsPurring()

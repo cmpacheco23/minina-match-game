@@ -50,6 +50,7 @@ let isTimeLeft, timeLeft, timer
 let openCards = []
 let completedMatches = []
 let cardCount
+let currentLevel
 
 
 // set difficulty to a number and assign it to a constant for each level
@@ -72,12 +73,37 @@ let cardCount
   /*----------------------------- Event Listeners -----------------------------*/
 
 
-easyGame.addEventListener('click', initEasy)
+// easyGame.addEventListener('click', initEasy)
 
-mediumGame.addEventListener('click', initMedium)
-hardGame.addEventListener('click', initHard)
-resetBtnEl.addEventListener('click', initEasy)
+// mediumGame.addEventListener('click', initMedium)
+// hardGame.addEventListener('click', initHard)
+// resetBtnEl.addEventListener('click', initEasy)
 
+easyGame.addEventListener('click', () => {
+  currentLevel = 'easy'
+  initEasy(); 
+});
+
+mediumGame.addEventListener('click', () => {
+  currentLevel = 'medium'
+  initMedium(); 
+});
+
+hardGame.addEventListener('click', () => {
+  currentLevel = 'hard'
+  initHard()
+});
+
+
+resetBtnEl.addEventListener('click', () => {
+  if (currentLevel === 'easy') {
+    initEasy()
+  } else if (currentLevel === 'medium') {
+    initMedium()
+  } else if (currentLevel === 'hard') {
+    initHard()
+  }
+});
 /*-------------------------------- Functions --------------------------------*/
 
   initEasy()
@@ -96,6 +122,7 @@ function initEasy() {
   timeLeft = 10
   expectedMatches = 6
   cardCount = 6
+  currentLevel = 'easy'
   render()
   isTimeLeft = true
   bodyElement.style.backgroundColor = '#48233C'
@@ -113,6 +140,7 @@ function initMedium() {
   timeLeft = 20
   expectedMatches = 36
   cardCount = 18
+  currentLevel = 'medium'
   render()
   isTimeLeft = true
   bodyElement.style.backgroundColor = '#370031'
@@ -129,6 +157,7 @@ function initHard() {
   timeLeft = 20
   expectedMatches = 30
   cardCount = 30
+  currentLevel = 'hard'
   render()
   isTimeLeft = true
   bodyElement.style.backgroundColor = '#0B0033'
@@ -341,3 +370,4 @@ function isGameOver() {
     gameOver = true
   }
 }
+

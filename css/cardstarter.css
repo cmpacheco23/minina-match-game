@@ -84,16 +84,6 @@
   transform: rotateY(180deg);
 }
 
-/* .card.front, .back {
-  backface-visibility: hidden;
-  position: absolute;
-  border-radius: 10px;
-  top: 0;
-  left:0;
-  height: 100%;
-  width: 100%;
-} */
-
 
 .card.back-minina {
   display: flex;

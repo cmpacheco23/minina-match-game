@@ -1,4 +1,4 @@
-let winSound = new Audio ('./sounds/slot-win-short.wav')
+
 let isHissing = new Audio ('./sounds/hiss.wav')
 let isPurring = new Audio ('./sounds/purr.wav')
 let winSoundv2 = new Audio ('./sounds/win-song.wav')
@@ -10,10 +10,6 @@ function playIsHissing () {
   isHissing.play()
 }
 
-function playWinSound () {
-  winSound.volume = 0.25
-  winSound.play()
-}
 
 function playIsPurring () {
   isPurring.volume = 0.30

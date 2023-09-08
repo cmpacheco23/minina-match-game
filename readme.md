@@ -53,16 +53,11 @@ Keep making matches to earn more points.
 * Back of the Cards: Cat-themed card illustrations by Carla Pacheco Muevecela using Canva
 
 #### Sound Effects:
-* Sound Effect 1 - Placeholder for Sound Effect 1
-* Sound Effect 2 - Placeholder for Sound Effect 2
-* Sound Effect 3 - Placeholder for Sound Effect 3
-* Sound Effect 4 - Placeholder for Sound Effect 4
+* Sound Effect 1 - [Cat Scream by InspectorJ on Free Sounds](https://freesound.org/people/InspectorJ/sounds/415209/)
+* Sound Effect 2 - [Digital Alarm from Tempouser on Free Sounds](https://freesound.org/people/Tempouser/sounds/123349/)
+* Sound Effect 3 - [Purr from Mafon2 on Free Sounds](https://freesound.org/people/Mafon2/sounds/436542/)
+* Sound Effect 4 - [Win Slot Machine from LittleRobotSoundFactory on Free Sounds](https://freesound.org/people/LittleRobotSoundFactory/sounds/274180/) 
 
-#### Animations:
-* Confetti Animation - Attribution for the confetti animation
-* Animation Placeholder 1 - Placeholder for Animation 1
-* Animation Placeholder 2 - Placeholder for Animation 2
-* Animation Placeholder 3 - Placeholder for Animation 3
 ***
 ### Technologies Used 💾
 * JavaScript

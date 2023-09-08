@@ -115,11 +115,10 @@ function initEasy() {
   matchesMade = 0 
   cardMatch = false
   winner = undefined
-  movesLeft.textContent = `${moves = 1}`
-  //use 4 moves when testing
+  movesLeft.textContent = `${moves = 20}`
   firstChoice = true
   matchesComplete = false
-  timeLeft = 10
+  timeLeft = 80
   expectedMatches = 6
   cardCount = 6
   currentLevel = 'easy'
@@ -134,10 +133,10 @@ function initMedium() {
   matchesMade = 0 
   cardMatch = false
   winner = undefined
-  movesLeft.textContent = `${moves = 40}`
+  movesLeft.textContent = `${moves = 60}`
   firstChoice = true
   matchesComplete = false
-  timeLeft = 20
+  timeLeft = 180
   expectedMatches = 36
   cardCount = 18
   currentLevel = 'medium'
@@ -154,7 +153,7 @@ function initHard() {
   movesLeft.textContent = `${moves = 150}`
   firstChoice = true
   matchesComplete = false
-  timeLeft = 20
+  timeLeft = 300
   expectedMatches = 30
   cardCount = 30
   currentLevel = 'hard'

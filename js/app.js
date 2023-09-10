@@ -49,6 +49,7 @@ let completedMatches = []
 let cardCount
 let currentLevel
 let newCardTemp
+let isFlipping
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -118,7 +119,7 @@ function initEasy() {
   render()
   isTimeLeft = true
   bodyElement.style.backgroundColor = '#48233C'
-
+  isFlipping = false
 }
 
 function initMedium() {
@@ -194,7 +195,7 @@ function fisherYatesShuffle(array) {
 
 function flipCard(evt) {
   console.log(gameOver)
-  if (gameOver || timeLeft <= 0 || winner === true || moves === 0 ){
+  if (gameOver || timeLeft <= 0 || winner === true || moves === 0 || isFlipping === true){
     return
   } else {
 
@@ -238,7 +239,8 @@ function flipCard(evt) {
 function checkforMatch() {
   if (openCards.length === 1) {
     nextCardMessage()
-} else if (openCards.length === 2) {
+  } else if (openCards.length === 2) {
+  isFlipping = true
   openCards[0].url === openCards[1].url ? cardMatch = true : cardMatch = false
 
   if (cardMatch) {
@@ -248,6 +250,7 @@ function checkforMatch() {
     completedMatches = openCards.slice(0,2) 
     openCards.splice(0,2) 
     checkMatchesMade()
+    isFlipping = false
   } else {
     moves -= 1
     matchFalseMessage()
@@ -257,6 +260,7 @@ function checkforMatch() {
       openCards[1].dom.style.transform = 'rotateY(-180deg)'
       openCards[1].dom.style.backgroundImage =`url(${"../images/backs/minina.svg"})`
       openCards.splice(1,1)
+      isFlipping = false
     },1000) 
   }
   }

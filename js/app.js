@@ -277,7 +277,7 @@ function matchFalseMessage(){
 }
 
 function nextCardMessage(){
-if (openCards.length === 1) {
+  if (openCards.length === 1) {
     messageEl.textContent = `Pounce on Your Next Card, Hooman, Now!`
 }
 }

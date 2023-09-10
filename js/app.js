@@ -103,14 +103,15 @@ resetBtnEl.addEventListener('click', () => {
 
 function initEasy() {
 
+  gameOver = false
   matchesMade = 0 
   cardMatch = false
   winner = undefined
-  movesLeft.textContent = `${moves = 20}`
+  movesLeft.textContent = `${moves = 2}`
   firstChoice = true
   matchesComplete = false
-  timeLeft = 80
-  timeRemaining.textContent = `${timeLeft = 80} seconds`
+  timeLeft = 10
+  timeRemaining.textContent = `${timeLeft = 10} seconds`
   expectedMatches = 6
   cardCount = 6
   currentLevel = 'easy'
@@ -161,7 +162,7 @@ function generateDeck() {
     cardsOut.push(card)
   })
   cardsToPlayGameWith = cardsOut
-  fisherYatesShuffle(cardsToPlayGameWith)
+  // fisherYatesShuffle(cardsToPlayGameWith)
 
 }
 
@@ -192,38 +193,45 @@ function fisherYatesShuffle(array) {
 }
 
 function flipCard(evt) {
-  endPlay()
-  isTimeLeft = true
-  const cardFront = document.getElementById(`${(evt.target.id)}`)
-  cardFront.classList.remove(`back-minina`)
-  cardFront.style.transform = 'rotateY(180deg)'
-  const id = parseInt(evt.target.id.split('-')[2])
-  const idMod = id % cardsToPlayGameWith.length
-  const cardUrl = cardsToPlayGameWith[idMod].image
-  cardFront.style.backgroundImage = `url(${cardUrl})`
+  console.log(gameOver)
+  if (gameOver || timeLeft <= 0 || winner === true || moves === 0 ){
+    return
+  } else {
 
-  const fullCardInfo = {
-    dom:cardFront, url:cardUrl
+    isTimeLeft = true
+    const cardFront = document.getElementById(`${(evt.target.id)}`)
+    cardFront.classList.remove(`back-minina`)
+    cardFront.style.transform = 'rotateY(180deg)'
+    const id = parseInt(evt.target.id.split('-')[2])
+    const idMod = id % cardsToPlayGameWith.length
+    const cardUrl = cardsToPlayGameWith[idMod].image
+    cardFront.style.backgroundImage = `url(${cardUrl})`
+  
+    const fullCardInfo = {
+      dom:cardFront, url:cardUrl
+    }
+  
+    openCards.push(fullCardInfo)   
+    if (firstChoice === true){
+      timer = setInterval(function() {
+        timeRemaining.textContent = timeLeft + ' seconds'
+        timeLeft -= 1
+        if ((timeLeft < 0 || isTimeLeft === false) && (winner === true)) {
+          timeRemaining.textContent = '🐾'
+        } else if ((timeLeft > 0 || isTimeLeft === true) && (moves === 0)) {
+          timeRemaining.textContent = '0'
+        } else if (timeLeft < 0 || isTimeLeft === false) {
+            timeRemaining.textContent = "Time's Up"
+            messageEl.textContent = `Time's Up! Next Time, Purr-haps!`
+            gameAudio.playTimerSound()}
+      }, 1000)}
+      firstChoice = false
+      isThereTimeLeft()
+      isWinnerTrue()
+      endPlay()
+      checkforMatch()
   }
-
-  openCards.push(fullCardInfo)   
-  if (firstChoice === true){
-    timer = setInterval(function() {
-      timeRemaining.textContent = timeLeft + ' seconds'
-      timeLeft -= 1
-      if ((timeLeft < 0 || isTimeLeft === false) && (winner === true)) {
-        timeRemaining.textContent = '🐾'
-      } else if ((timeLeft > 0 || isTimeLeft === true) && (moves === 0)) {
-        timeRemaining.textContent = '0'
-      } else if (timeLeft < 0 || isTimeLeft === false) {
-          timeRemaining.textContent = "Time's Up"
-          messageEl.textContent = `Time's Up! Next Time, Purr-haps!`
-          gameAudio.playTimerSound()}
-    }, 1000)}
     
-  firstChoice = false
-  isWinnerTrue()
-  checkforMatch()
 }
 
 
@@ -287,6 +295,7 @@ function checkMatchesMade(){
 }
 
 function isThereTimeLeft(){
+  console.log(timeLeft)
   if(timeLeft < 0)
   isTimeLeft = false
 }
@@ -305,6 +314,9 @@ function isWinnerTrue(){
     gameAudio.playWinSound()
     confetti.start(1200)
     gameOverMessage()
+    gameOver = true
+    console.log(gameOver)
+    console.log(winner)
     }
   } else {
       isLooserTrue()
@@ -328,6 +340,7 @@ function gameOverMessage(){
 }
 
 function endPlay() {
+  console.log(gameOver)
   if (gameOver) {
     return
   }

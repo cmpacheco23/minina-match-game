@@ -6,11 +6,12 @@
 
 A little bit about Minina: she's a 6-year-old female American Shorthair rescue cat who adores treats, appreciates the occasional hug, and finds pure bliss in her favorite pastime—napping. 🐾
 
+#### Click to view [planning materials](https://docs.google.com/document/d/1LU7e4GeqqU1XGib3m1bBqbqHcjbGeta1vEV4Z5cTEyI/edit)
 ***
 ### Getting Started:
 To embark on this exciting adventure, <em><strong>click the link below </strong></em> to play the game. 
 
-[Play Minina's Matchup Adventure](https://carla-minina-match-game.netlify.app/)
+### [Play Minina's Matchup Adventure](https://carla-minina-match-game.netlify.app/)
 
 Your mission, should you choose to accept it, is to match all of the cards on the screen before the timer runs out and before you're out of moves. Minina's watchful eye is on you as the timer ticks down, and you'll need to sharpen your memory and quick thinking to succeed. 
 

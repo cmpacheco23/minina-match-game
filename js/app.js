@@ -103,16 +103,15 @@ resetBtnEl.addEventListener('click', () => {
   initHard()
 
 function initEasy() {
-
   gameOver = false
   matchesMade = 0 
   cardMatch = false
   winner = undefined
-  movesLeft.textContent = `${moves = 2}`
+  movesLeft.textContent = `${moves = 20}`
   firstChoice = true
   matchesComplete = false
-  timeLeft = 10
-  timeRemaining.textContent = `${timeLeft = 10} seconds`
+  timeLeft = 80
+  timeRemaining.textContent = `${timeLeft = 80} seconds`
   expectedMatches = 6
   cardCount = 6
   currentLevel = 'easy'
@@ -123,6 +122,7 @@ function initEasy() {
 }
 
 function initMedium() {
+  gameOver = false
   matchesMade = 0 
   cardMatch = false
   winner = undefined
@@ -137,9 +137,11 @@ function initMedium() {
   render()
   isTimeLeft = true
   bodyElement.style.backgroundColor = '#370031'
+  isFlipping = false
 }
 
 function initHard() {
+  gameOver = false
   matchesMade = 0 
   cardMatch = false
   winner = undefined
@@ -154,6 +156,7 @@ function initHard() {
   render()
   isTimeLeft = true
   bodyElement.style.backgroundColor = '#0B0033'
+  isFlipping = false
 }
 
 function generateDeck() {
@@ -163,7 +166,7 @@ function generateDeck() {
     cardsOut.push(card)
   })
   cardsToPlayGameWith = cardsOut
-  // fisherYatesShuffle(cardsToPlayGameWith)
+  fisherYatesShuffle(cardsToPlayGameWith)
 
 }
 
@@ -207,11 +210,9 @@ function flipCard(evt) {
     const idMod = id % cardsToPlayGameWith.length
     const cardUrl = cardsToPlayGameWith[idMod].image
     cardFront.style.backgroundImage = `url(${cardUrl})`
-  
     const fullCardInfo = {
       dom:cardFront, url:cardUrl
     }
-  
     openCards.push(fullCardInfo)   
     if (firstChoice === true){
       timer = setInterval(function() {
@@ -219,8 +220,7 @@ function flipCard(evt) {
         timeLeft -= 1
         if ((timeLeft < 0 || isTimeLeft === false) && (winner === true)) {
           timeRemaining.textContent = '🐾'
-        } else if ((timeLeft > 0 || isTimeLeft === true) && (moves === 0)) {
-          timeRemaining.textContent = '0'
+        } else if ((timeLeft > 0 || isTimeLeft === true) && (moves === 0)) { timeRemaining.textContent = '0'
         } else if (timeLeft < 0 || isTimeLeft === false) {
             timeRemaining.textContent = "Time's Up"
             messageEl.textContent = `Time's Up! Next Time, Purr-haps!`
